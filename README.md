@@ -1,6 +1,6 @@
 # README #
 
-![Alt text](http://dank)
+![Alt text](http://vignette1.wikia.nocookie.net/characters/images/9/98/Kermit-two1.jpg/revision/latest?cb=20130504163204)
 
 ### Summary ###
 
@@ -24,4 +24,4 @@ Then visit the following url (may be subject to change):
 
 ### Team Members ###
 
-@cbeardsmore @jordanchou @AdamBrown9 @BrendanLally @edwardlim 
+@cbeardsmore @jordanchou @AdamBrown9 @BrendanLally @edwardlim
