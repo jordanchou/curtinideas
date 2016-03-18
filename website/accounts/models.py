@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
-class CustomuserManager(BaseUserManager):
-    def create_user(self, first_name, last_name, email, id, password=None):
+class CustomUserManager(BaseUserManagr:
+    def create_user(self, first_name, last_name, email, sid, password=None):
         '''
-        Creates and saves a User with the given email, first name, last name, id
+        Creates and saves a User with the given email, first name, last name, sid
         and password.
         '''
     
@@ -15,7 +15,7 @@ class CustomuserManager(BaseUserManager):
                         email=self.normalize_email(email),
                         first_name=first_name,
                         last_name=last_name,
-                        id=id,
+                        sid=sid,
                         )
 
         user.set_password(password)
@@ -23,15 +23,15 @@ class CustomuserManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, first_name, last_name, email, id, password):
+    def create_superuser(self, first_name, last_name, email, sid, password):
         '''
         Creates and saves a superuser with the given email, firstname, lastname
-        , id and password
+        , sid and password
         '''
 
         user = self.create_user(
                                 email, password=password, first_name=first_name,
-                                last_name=last_name, id=id
+                                last_name=last_name, sid=sid
                                )
 
         user.is_admin = True
@@ -48,14 +48,14 @@ class CustomUser(AbstractBaseUser):
 
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    id = models.CharField(max_length=8)
+    sid = models.CharField(max_length=8)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'id']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'sid']
 
     def get_full_name(self):
         # Return the user's full name
