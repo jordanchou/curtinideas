@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
 
-class CustomUserManager(BaseUserManagr:
+class CustomUserManager(BaseUserManager):
     def create_user(self, first_name, last_name, email, sid, password=None):
         '''
         Creates and saves a User with the given email, first name, last name, sid
@@ -29,9 +30,12 @@ class CustomUserManager(BaseUserManagr:
         , sid and password
         '''
 
-        user = self.create_user(
-                                email, password=password, first_name=first_name,
-                                last_name=last_name, sid=sid
+        user = self.create_user( 
+                                first_name=first_name, 
+                                last_name=last_name,
+                                email=email, 
+                                sid=sid,
+                                password=password
                                )
 
         user.is_admin = True
@@ -41,14 +45,14 @@ class CustomUserManager(BaseUserManagr:
 
 class CustomUser(AbstractBaseUser):
     email = models.EmailField(
-                              verbose_name='email_address',
+                              verbose_name='email address',
                               max_length = 255,
                               unique=True
                              )
 
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    sid = models.CharField(max_length=8)
+    sid = models.CharField(max_length=8, default=0)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
@@ -82,6 +86,15 @@ class CustomUser(AbstractBaseUser):
         
         return self.is_admin
 
+    @property
+    def is_superuser(self):
+        return self.is_admin
+
+    def has_perm(self, perm, obj=None):
+        return self.is_admin
+
+    def has_module_perms(self, app_label):
+        return self.is_admin
 
 
 
