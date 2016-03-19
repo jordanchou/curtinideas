@@ -4,8 +4,8 @@ from .views import RegistrationView
 from django.contrib.auth import views
 
 urlpatterns = [
-                url(r'^register/$', RegistrationView.as_view(), name='register'),
-                url(r'^register/done/$', views.password_reset_done,
+                url(r'^register/', RegistrationView.as_view(), name='register'),
+                url(r'^register/done/', views.password_reset_done,
                 {
                     'template_name' : 'registration/initial_done.html',
                 },
@@ -17,7 +17,7 @@ urlpatterns = [
                     'template_name': 'registration/initial_confirm.html',
                     'post_reset_redirect': 'accounts:register-complete',
                 }, name='register-confirm'),
-                url(r'^register/complete/$', 
+                url(r'^register/complete/', 
                 views.password_reset_complete, {
                 'template_name': 'registration/initial_complete.html',
                  }, name='register-complete'),
