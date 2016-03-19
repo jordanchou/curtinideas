@@ -1,4 +1,25 @@
 
+{% if user.is_authenticated %}
+    <p>
+    Welcome, {{ user.username }}
+    <a href="{% url 'accounts:password_change' %}">[Change Password]</a>
+    <a href="{% url 'accounts:logout' %}">[logout]</a>
+    </p>
+{% else %}
+    <p>Welcome, Guest <a href="{% url 'accounts:login' %}">[login]</a></p>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
 <body>
     <div class="page-header">
             <h1><a href="/">HOOLI XYZ: CurtinIdeas</a></h1>
