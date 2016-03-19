@@ -19,6 +19,7 @@ from django.contrib import admin
 from accounts import urls as accounts_urls
 
 urlpatterns = [
+    url(r'^$', 'website.views.index', name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(accounts_urls)),
 ]
