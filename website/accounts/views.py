@@ -1,9 +1,12 @@
 from django.contrib.auth.forms import PasswordResetForm
 from django.shortcuts import redirect
 from django.views.generic import CreateView
+from django.http import HttpResponse
+from django.template import Context, loader
 
 from .forms import RegistrationForm
 from .models import CustomUser
+
 
 
 class RegistrationView(CreateView):
@@ -28,5 +31,6 @@ class RegistrationView(CreateView):
         # This form sends the email on save()
         #reset_form.save(**opts)
 
-        return redirect('accounts:register-done')
+        template = loader.get_template('accounts/registration_done.html')
 
+        return HttpResponse(template.render())

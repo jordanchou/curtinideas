@@ -2,10 +2,15 @@ from django.conf.urls import url
 
 from .views import RegistrationView
 from django.contrib.auth import views
+from django.contrib.auth.views import login, logout
 
 urlpatterns = [
-                url(r'^register/', RegistrationView.as_view(), name='register'),
-                url(r'^register/done/', views.password_reset_done,
+                url(r'^login/$', 'django.contrib.auth.views.login', name='login',
+                    kwargs={'template_name': 'accounts/login.html'}
+                   ),
+
+                url(r'^register/$', RegistrationView.as_view(), name='register'),
+                url(r'^register/done/$', views.password_reset_done,
                 {
                     'template_name' : 'registration/initial_done.html',
                 },
@@ -17,9 +22,9 @@ urlpatterns = [
                     'template_name': 'registration/initial_confirm.html',
                     'post_reset_redirect': 'accounts:register-complete',
                 }, name='register-confirm'),
-                url(r'^register/complete/', 
+                url(r'^register/complete/$', 
                 views.password_reset_complete, {
-                'template_name': 'registration/initial_complete.html',
+                'template_name': 'registration/.html',
                  }, name='register-complete'),
                  
                  url(r'^login/$', 'django.contrib.auth.views.login',
