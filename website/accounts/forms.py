@@ -6,7 +6,7 @@ class RegistrationForm(UserCreationForm):
     first_name = forms.CharField(label='First Name', max_length=30)
     last_name = forms.CharField(label='Last Name', max_length=30)
     email = forms.EmailField(label='Email')
-    sid = forms.IntegerField(label='Student/Staff ID', required=False)
+    sid = forms.CharField(label='Student/Staff ID', required=False, max_LEngth=9)
     #password = CharField(widget=PasswordInput())
     
     
