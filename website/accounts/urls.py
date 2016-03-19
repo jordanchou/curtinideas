@@ -21,6 +21,12 @@ urlpatterns = [
                 views.password_reset_complete, {
                 'template_name': 'registration/initial_complete.html',
                  }, name='register-complete'),
+                 
+                 url(r'^login/$', 'django.contrib.auth.views.login',
+                    {
+                        'template_name':'accounts/login.html'
+                    }
+                    ),
                ]
                  
             
