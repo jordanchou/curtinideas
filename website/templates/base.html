@@ -8,28 +8,16 @@
 {% else %}
     <p>Welcome, Guest <a href="{% url 'accounts:login' %}">[login]</a></p>
 {% endif %}
-
-
-
-
-
-
-
-
-
-
-
-
 <body>
     <div class="page-header">
             <h1><a href="/">HOOLI XYZ: CurtinIdeas</a></h1>
                 </div>
                     <div class="content container">
                             <div class="row">
-                                        <div class="col-md-8">
-                                                    {% block content %}
-                                                    {% endblock %}
-                                        </div>
-                             </div>
+                                <div class="col-md-8">
+                                    {% block content %}
+                                    {% endblock %}
+                                </div>
+                            </div>
                    </div>
 </body>
