@@ -20,9 +20,9 @@ from accounts import urls as accounts_urls
 
 urlpatterns = [
     url(r'^$', 'website.views.index', name='index'),
-    url(r'^$about_us/', 'website.views.about_us'),
-    url(r'^$contact_us/', 'website.views.contact_us'),
-    url(r'^$faq/', 'website.views.contact_us'),
+    url(r'^about_us/', 'website.views.about_us'),
+    url(r'^contact_us/', 'website.views.contact_us'),
+    url(r'^faq/', 'website.views.contact_us'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(accounts_urls, namespace="accounts")),
 ]
