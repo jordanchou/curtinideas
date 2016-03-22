@@ -29,11 +29,20 @@
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                   </form>
-                  <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/accounts/profile">View Account</a></li>
-                    <li><a href="/accounts/register">Sign Up</a></li>
-                    <li><a href="/accounts/login">Login</a></li>
-                  </ul>
+
+                  {% if user.is_authenticated %}
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="/accounts/register">Sign Up</a></li>
+                      <li><a href="/accounts/login">Login</a></li>
+                    </ul>
+                  {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="/accounts/submissions">View Submissions</a></li>
+                      <li><a href="/accounts/profile">View Account</a></li>
+                      <li><a href="/accounts/logout">Logout</a></li>
+                    </ul>
+                  {% endif %}
+
                 </div>
               </div>
             </nav>
