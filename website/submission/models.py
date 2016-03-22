@@ -14,9 +14,9 @@ class Submission(models.Model):
 	created_date = models.DateTimeField(default=timezone.now)
 	published_date = models.DateTimeField(blank=True, null=True)
 	comments = models.TextField()
-	#upvotes = models.
-	#downvotes = models.
-	num_views = models.PositiveSmallIntegerField()
+	upvotes = models.PositiveSmallIntegerField(default=0)
+	downvotes = models.PositiveSmallIntegerField(default=0)
+	num_views = models.PositiveSmallIntegerField(default=0)
 	category = models.CharField(max_length=50)
 
 	def post(self):
