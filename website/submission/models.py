@@ -5,22 +5,26 @@ from django.utils import timezone
 
 # Create your models here.
 class Submission(models.Model):
-	sub_id = models.CharField(max_length=5, default=0)
-	sub_title = models.CharField(max_length=30)
-	#author = models.ForeignKey()
-	#link to customUser
+    title = models.CharField(max_length=100)
+    author = models.ForeignKey('accounts.CustomUser')
 
-	text = models.TextField()
-	created_date = models.DateTimeField(default=timezone.now)
-	published_date = models.DateTimeField(blank=True, null=True)
-	comments = models.TextField()
-	upvotes = models.PositiveSmallIntegerField(default=0)
-	downvotes = models.PositiveSmallIntegerField(default=0)
-	num_views = models.PositiveSmallIntegerField(default=0)
-	category = models.CharField(max_length=50)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
+    upvotes = models.PositiveSmallIntegerField(default=0)
+    downvotes = models.PositiveSmallIntegerField(default=0)
+    num_views = models.PositiveSmallIntegerField(default=0)
+    category = models.CharField(max_length=50)
 
-	def post(self):
-		self.published_date = timezone.now()
-		self.save()
+    def post(self):
+        self.published_date = timezone.now()
+        self.num_views = 0
+        self.upvotes = 0
+        self.downvotes = 0
+    
+        self.save()
+
+    def __str__(self):
+        return self.title
 
 
