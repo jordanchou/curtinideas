@@ -17,6 +17,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from accounts import urls as accounts_urls
+from submission import urls as submissions_urls
 
 urlpatterns = [
     url(r'^$', 'website.views.index', name='index'),
@@ -25,4 +26,5 @@ urlpatterns = [
     url(r'^faq/', 'website.views.contact_us'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(accounts_urls, namespace="accounts")),
+    url(r'^submissions/', include(submissions_urls, namespace="submissions"))
 ]
