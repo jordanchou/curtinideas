@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
+
+
+
     {% for submission in submissions %}
         <div>
-            <h1><a href="">{{ submission.title }}</a></h1>
+            <h1><a href="{% url 'submission:submission_detail' pk=submission.pk %}">{{ submission.title }}</a></h1>
             <p>{{ submission.published_date }}</p>
             <p>{{submission.author.get_full_name}}</p>
         </div>

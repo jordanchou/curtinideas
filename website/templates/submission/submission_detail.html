@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="submission">
+        {% if post.published_date %}
+            <div class="date">
+                {{ submission.published_date }}
+            </div>
+        {% endif %}
+        <h1>{{ submission.title }}</h1>
+        <h2>{{submission.author.get_full_name }}</h2>
+        <h2>{{submision.category}}</h2>
+        <p>{{ submission.text|linebreaks }}</p>
+    </div>
+{% endblock %}

@@ -26,5 +26,5 @@ urlpatterns = [
     url(r'^faq/', 'website.views.contact_us'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(accounts_urls, namespace="accounts")),
-    url(r'^submissions/', include(submissions_urls, namespace="submissions"))
+    url(r'^submission/', include(submissions_urls, namespace="submission"))
 ]
