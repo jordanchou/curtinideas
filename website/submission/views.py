@@ -15,7 +15,6 @@ def submission_list(request):
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
-<<<<<<< HEAD
 def submission_list_upvotes(request):
     submissions = Submission.objects.order_by('upvotes')
 
