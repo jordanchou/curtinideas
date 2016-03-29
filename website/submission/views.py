@@ -1,4 +1,5 @@
 from .models import Submission
+from .forms import SubmissionForm
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 
@@ -14,6 +15,7 @@ def submission_list(request):
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
+<<<<<<< HEAD
 def submission_list_upvotes(request):
     submissions = Submission.objects.order_by('upvotes')
 
@@ -33,4 +35,17 @@ def submission_list_author(request):
     submissions = Submission.objects.order_by('author')
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
+
+def submission_new(request):
+    if request.method == "POST":
+        form = SubmissionForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            #return redirect('view_submissions')
+    else:
+        form = SubmissionForm()
+    return render(request, 'submission/submission_edit.html', {'form': form})
 
