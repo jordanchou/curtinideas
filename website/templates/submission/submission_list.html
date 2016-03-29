@@ -1,14 +1,16 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block content %}
 
 
 
     {% for submission in submissions %}
         <div>
+            <img class="img-responsive" src="{% static "submission/upvote.png" %}" align="left" alt="Upvotes"/> {{ submission.upvotes }}
+            <img class="img-responsive" src="{% static "submission/downvote.png" %}" align="middle" alt="Downvotes"/> {{ submission.downvotes }}
             <h1><a href="{% url 'submission:submission_detail' pk=submission.pk %}">{{ submission.title }}</a></h1>
             <p>{{ submission.published_date }}</p>
             <p>Author: {{submission.author.get_full_name}}</p>
-            <p>upvotes: {{ post.upvotes }} downvotes: {{ post.downvotes }}</p>
 		    <br></br>
         </div>
     {% endfor %}
