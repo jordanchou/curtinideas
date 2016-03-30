@@ -5,14 +5,36 @@
 
 
     {% for submission in submissions %}
-        <div>
-            <img class="img-responsive" src="{% static "submission/upvote.png" %}" align="left" alt="Upvotes"/> {{ submission.upvotes }}</br></br>
-            <img class="img-responsive" src="{% static "submission/downvote.png" %}" align="left" alt="Downvotes"/> {{ submission.downvotes }}
-            <h1><a href="{% url 'submission:submission_detail' pk=submission.pk %}">{{ submission.title }}</a></h1>
-            <p>{{ submission.published_date }}</p>
-            <p>Author: {{submission.author.get_full_name}}</p>
-		    <br></br>
-        </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover ">
+            <tbody>
+                <tr>
+                    <td class="col-sm-1" style="vertical-align:middle;">
+                        <img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes"/> <h6>{{ submission.upvotes }} </h6>
+                        <h4 class="text-success">{{ submission.get_score }}</h4>
+                        <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes"/> <h6>{{ submission.downvotes }}</h6>
+                    </td>
+                    <td colspan=2> 
+                        <h1>
+                            <a href="{% url 'submission:submission_detail' pk=submission.pk %}">{{ submission.title }}</a>
+                        </h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-sm-2">
+                        {{submission.category}}
+                    </td>
+                    <td>
+                        Author: {{submission.author.get_full_name}}
+                    </td>
+                    <td>
+                        {{ submission.published_date }}
+                    </td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+    </br>
     {% endfor %}
 {% endblock %}
 

@@ -34,4 +34,8 @@ class Submission(models.Model):
     def get_id(self):
         return self.submission_id
 
-
+    def get_score(self):
+        if ( (self.upvotes - self.downvotes) < 0 ):
+            return 0
+            
+        return (self.upvotes - self.downvotes)
