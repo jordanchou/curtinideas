@@ -35,7 +35,7 @@ def submission_list_author(request):
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
-def submission_new(request):
+def submission_create(request):
     if request.method == "POST":
         form = SubmissionForm(request.POST)
         if form.is_valid():
@@ -43,8 +43,10 @@ def submission_new(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            #return redirect('view_submissions')
+            
+            return submission_list(request)
     else:
         form = SubmissionForm()
-    return render(request, 'submission/submission_edit.html', {'form': form})
+    
+    return render(request, 'submission/submission_create.html', {'form': form})
 
