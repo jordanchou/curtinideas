@@ -27,7 +27,7 @@ SECRET_KEY = 'ra2lbbt2@at1iu&det80kqi34rigv16u=(3z7=f2!i@t#t$%5-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cbeardsmore.pythonanywhere.com' ]
 
 #CUSTOM USER MODEL
 
