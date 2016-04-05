@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from .views import RegistrationView
+from .views import RegistrationView, AccountDetailView, AccountUpdateView
 from django.contrib.auth import views
 from django.contrib.auth.views import login, logout, password_change, password_change_done
 
@@ -51,6 +51,10 @@ urlpatterns = [
                         'template_name':'accounts/login.html'
                     }
                     ),
+
+                 url(r'^profile/(?P<slug>.*)/$', AccountDetailView.as_view(), name='account_detail'),
+                 url(r'^profile/edit/.*/$', AccountUpdateView.as_view(), name='customuser_update'),
+
                ]
                  
             

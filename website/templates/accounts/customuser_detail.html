@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Profile</h1>
+<h2>First Name:{{ object.first_name }}</h2>
+<h2>Last Name:{{ object.last_name }}</h2>
+<h2>ID (Staff/Student): {{ object.sid }}</h2>
+
+<li><a href="{% url 'accounts:customuser_update' %}">Update Details</a></li>
+
+{% endblock %}

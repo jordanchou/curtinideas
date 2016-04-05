@@ -3,7 +3,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, first_name, last_name, email, sid, password=None):
+    def create_user(self, first_name, last_name, email, sid, password=None, **args):
         '''
         Creates and saves a User with the given email, first name, last name, sid
         and password.
@@ -24,7 +24,7 @@ class CustomUserManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, first_name, last_name, email, sid, password):
+    def create_superuser(self, first_name, last_name, email, sid, password, **args):
         '''
         Creates and saves a superuser with the given email, firstname, lastname
         , sid and password
@@ -35,6 +35,7 @@ class CustomUserManager(BaseUserManager):
                                 last_name=last_name,
                                 email=email, 
                                 sid=sid,
+                                slug=slugify(email),
                                 password=password
                                )
 
@@ -56,6 +57,7 @@ class CustomUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    slug = models.SlugField(max_length = 100, default = email)
 
     objects = CustomUserManager()
 
@@ -97,6 +99,5 @@ class CustomUser(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return self.is_admin
 
-
-
-
+    def authenticated(self):
+        return True
