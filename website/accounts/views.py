@@ -54,3 +54,11 @@ class AccountUpdateView(DetailView):
     model = CustomUser
     fields = ['First Name', 'Last Name', 'ID']
     template_name_suffix = '_update_form'
+
+    def get(self, slug, **kwargs):
+        account = get_object_or_404(CustomUser, slug)
+
+        return render(request, 'accounts/customuser_update_form.html', {'accounts':account})
+
+    def get_object(self, queryset=None):
+        return self.request.user

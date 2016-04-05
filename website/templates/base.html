@@ -62,11 +62,34 @@
             </body>
 
         <div id="footer"></div>
-            <div class="jumbotron">
 
-            <p class="txt-center rem f-14 white">
-                &copy; 2016 HOOLI.XYZ CurtinIdeas Platform.
-            </p>
+            <div class="well well-sm">
+              <table class="table table-striped table-hover text-center">
+                <thead>
+                  <th class="text-center"><h4>HooliXYZ</h4></th>
+                  <th class="text-center"><h4>Submissions</h4></th>
+                  <th class="text-center"><h4>Me</h4></th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a href="/about_us">About Us <span class="sr-only">(current)</span></a></td>
+                    <td><a href="/submissions/view">Discover Ideas <span class="sr-only">(current)</span></a></td>
+                    <td><a href="/accounts/submissions">My Ideas</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="/contact_us">Contact Us <span class="sr-only">(current)</span></a></td>
+                    <td><a href="/submissions/submit">Create an Idea <span class="sr-only">(current)</span></a></td>
+                    <td><a href="{% url 'accounts:account_detail' slug=user.slug %}">View Account</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="/faq">FAQ <span class="sr-only">(current)</span></a></td>
+                    <td></td>
+                    <td><a href="/accounts/logout">Logout</a></td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
         </div>
 </body>
 

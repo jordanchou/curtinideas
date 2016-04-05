@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
+from django.template.defaultfilters import slugify
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, first_name, last_name, email, sid, password=None, **args):
@@ -16,8 +17,10 @@ class CustomUserManager(BaseUserManager):
                         email=self.normalize_email(email),
                         first_name=first_name,
                         last_name=last_name,
-                        sid=sid,
+                        sid=sid
                         )
+
+        user.slug = user.email
 
         user.set_password(password)
         user.save(using=self._db)
@@ -35,7 +38,6 @@ class CustomUserManager(BaseUserManager):
                                 last_name=last_name,
                                 email=email, 
                                 sid=sid,
-                                slug=slugify(email),
                                 password=password
                                )
 
@@ -57,7 +59,7 @@ class CustomUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    slug = models.SlugField(max_length = 100, default = email)
+    slug = models.SlugField(max_length = 100, null = True)
 
     objects = CustomUserManager()
 

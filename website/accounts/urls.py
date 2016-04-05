@@ -45,15 +45,9 @@ urlpatterns = [
                 views.password_reset_complete, {
                 'template_name': 'registration/.html',
                  }, name='register-complete'),
-                 
-                 url(r'^login/$', 'django.contrib.auth.views.login',
-                    {
-                        'template_name':'accounts/login.html'
-                    }
-                    ),
 
                  url(r'^profile/(?P<slug>.*)/$', AccountDetailView.as_view(), name='account_detail'),
-                 url(r'^profile/edit/.*/$', AccountUpdateView.as_view(), name='customuser_update'),
+                 url(r'^profile/edit/(?P<slug>.*)/$', AccountUpdateView.as_view(), name='get'),
 
                ]
                  
