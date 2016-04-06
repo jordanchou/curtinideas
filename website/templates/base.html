@@ -32,8 +32,8 @@
 
                   {% if user.is_authenticated %}
                     <ul class="nav navbar-nav navbar-right">
-                      <li><a href="/accounts/submissions">View Submissions</a></li>
-                      <li><a href="{% url 'accounts:account_detail' slug=user.slug %}">View Account</a></li>
+                      <li><a href="/accounts/submissions">My Submissions</a></li>
+                      <li><a href="{% url 'accounts:account_detail' slug=user.slug %}">My Account</a></li>
                       <li><a href="/accounts/logout">Logout</a></li>
                     </ul>
                   {% else %}
