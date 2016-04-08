@@ -36,7 +36,7 @@ def submission_list_author(request):
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 def submission_list_self(request, slug):
-    submissions = Submission.objects.filter(author=slug)
+    submissions = Submission.objects.filter(author__email=slug)
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 

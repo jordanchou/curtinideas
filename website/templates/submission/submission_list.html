@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block content %}
 
-
+<h1>Discover Ideas<h1>
 
     {% for submission in submissions %}
     <div class="table-responsive">
@@ -15,9 +15,9 @@
                         <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes"/> <h6>{{ submission.downvotes }}</h6>
                     </td>
                     <td colspan=2> 
-                        <h1>
+                        <h2>
                             <a href="{% url 'submission:submission_detail' pk=submission.pk %}">{{ submission.title }}</a>
-                        </h1>
+                        </h2>
                     </td>
                 </tr>
                 <tr>
@@ -25,7 +25,7 @@
                         {{submission.category}}
                     </td>
                     <td>
-                        Author: {{submission.author.get_full_name}}
+                        <a href="{% url 'accounts:account_detail' slug=submission.author %}">Author: {{submission.author.get_full_name}}</a>
                     </td>
                     <td>
                         {{ submission.published_date }}
