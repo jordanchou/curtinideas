@@ -48,7 +48,6 @@ urlpatterns = [
 
                  url(r'^profile/(?P<slug>.*)/$', AccountDetailView.as_view(), name='account_detail'),
                  url(r'^profile/edit/(?P<slug>.*)/$', AccountUpdateView.as_view(), name='get'),
-
                ]
                  
             

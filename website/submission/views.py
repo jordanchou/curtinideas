@@ -35,6 +35,11 @@ def submission_list_author(request):
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
+def submission_list_self(request, slug):
+    submissions = Submission.objects.filter(author=slug)
+
+    return render(request, 'submission/submission_list.html', {'submissions': submissions})
+
 def submission_create(request):
     if request.method == "POST":
         form = SubmissionForm(request.POST)

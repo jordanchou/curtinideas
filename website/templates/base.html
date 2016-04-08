@@ -32,7 +32,7 @@
 
                   {% if user.is_authenticated %}
                     <ul class="nav navbar-nav navbar-right">
-                      <li><a href="/accounts/submissions">My Submissions</a></li>
+                      <li><a href="{% url 'submission:account_submission' slug=user.slug %}">My Submissions</a></li>
                       <li><a href="{% url 'accounts:account_detail' slug=user.slug %}">My Account</a></li>
                       <li><a href="/accounts/logout">Logout</a></li>
                     </ul>
@@ -62,7 +62,6 @@
             </body>
 
         <div id="footer"></div>
-
             <div class="well well-sm">
               <table class="table table-striped table-hover text-center">
                 <thead>
@@ -74,17 +73,29 @@
                   <tr>
                     <td><a href="/about_us">About Us <span class="sr-only">(current)</span></a></td>
                     <td><a href="/submissions/view">Discover Ideas <span class="sr-only">(current)</span></a></td>
-                    <td><a href="/accounts/submissions">My Ideas</a></td>
+                    {% if user.is_authenticated %}
+                      <td><a href="{% url 'submission:account_submission' slug=user.slug %}">My Ideas</a></td>
+                    {% else %}
+                      <td><a href="/accounts/register">Sign Up</a></td>
+                    {% endif %}
                   </tr>
                   <tr>
                     <td><a href="/contact_us">Contact Us <span class="sr-only">(current)</span></a></td>
                     <td><a href="/submissions/submit">Create an Idea <span class="sr-only">(current)</span></a></td>
-                    <td><a href="{% url 'accounts:account_detail' slug=user.slug %}">View Account</a></td>
+                    {% if user.is_authenticated %}
+                      <td><a href="{% url 'accounts:account_detail' slug=user.slug %}">View Account</a></td>
+                    {% else %}
+                      <td><a href="/accounts/login">Login</a></td>
+                    {% endif %}
                   </tr>
                   <tr>
                     <td><a href="/faq">FAQ <span class="sr-only">(current)</span></a></td>
                     <td></td>
-                    <td><a href="/accounts/logout">Logout</a></td>
+                    {% if user.is_authenticated %}
+                      <td><a href="/accounts/logout">Logout</a></td>
+                    {% else %}
+                      <td></td>
+                    {% endif %}
                   </tr>
                 </tbody>
               </table>
