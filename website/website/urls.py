@@ -23,7 +23,6 @@ urlpatterns = [
     url(r'^accounts/', include(accounts_urls, namespace="accounts")),
     url(r'^$', 'website.views.index', name='index'),
     url(r'^about_us/', 'website.views.about_us'),
-    url(r'^contact_us/', 'website.views.contact_us'),
     url(r'^faq/', 'website.views.faq'),
     url(r'^admin/', admin.site.urls),
     url(r'^submission/', include(submissions_urls, namespace="submission"))

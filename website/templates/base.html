@@ -16,10 +16,9 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li class="active"><a href="/submission/">Discover Ideas <span class="sr-only">(current)</span></a></li>
-                    <li class="active"><a href="/submission/submit">Create an Idea <span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="/submission/">Discover<span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="/submission/submit">Create<span class="sr-only">(current)</span></a></li>
                     <li class="active"><a href="/faq">FAQ <span class="sr-only">(current)</span></a></li>
-                    <li class="active"><a href="/contact_us">Contact Us <span class="sr-only">(current)</span></a></li>
                             <li class="active"><a href="/about_us">About Us <span class="sr-only">(current)</span></a></li>
 
                   </ul>
@@ -72,7 +71,7 @@
                 <tbody>
                   <tr>
                     <td><a href="/about_us">About Us <span class="sr-only">(current)</span></a></td>
-                    <td><a href="/submissions/view">Discover Ideas <span class="sr-only">(current)</span></a></td>
+                    <td><a href="/submission/view">Discover<span class="sr-only">(current)</span></a></td>
                     {% if user.is_authenticated %}
                       <td><a href="{% url 'submission:account_submission' slug=user.slug %}">My Ideas</a></td>
                     {% else %}
@@ -80,23 +79,14 @@
                     {% endif %}
                   </tr>
                   <tr>
-                    <td><a href="/contact_us">Contact Us <span class="sr-only">(current)</span></a></td>
-                    <td><a href="/submissions/submit">Create an Idea <span class="sr-only">(current)</span></a></td>
+                    <td><a href="/faq">FAQ <span class="sr-only">(current)</span></a></td>
+                    <td><a href="/submission/submit">Create<span class="sr-only">(current)</span></a></td>
                     {% if user.is_authenticated %}
                       <td><a href="{% url 'accounts:account_detail' slug=user.slug %}">View Account</a></td>
                     {% else %}
                       <td><a href="/accounts/login">Login</a></td>
                     {% endif %}
-                  </tr>
-                  <tr>
-                    <td><a href="/faq">FAQ <span class="sr-only">(current)</span></a></td>
-                    <td></td>
-                    {% if user.is_authenticated %}
-                      <td><a href="/accounts/logout">Logout</a></td>
-                    {% else %}
-                      <td></td>
-                    {% endif %}
-                  </tr>
+
                 </tbody>
               </table>
 

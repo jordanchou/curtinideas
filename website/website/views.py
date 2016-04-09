@@ -15,12 +15,6 @@ def about_us(request):
 
     return render(request, 'about_us.html', {})
 
-def contact_us(request):
-    # Load template
-    template = loader.get_template("contact_us.html")
-
-    return render(request, 'contact_us.html', {})
-
 def faq(request):
     # Load template
     template = loader.get_template("faq.html")
