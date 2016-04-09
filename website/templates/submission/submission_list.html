@@ -10,9 +10,13 @@
             <tbody>
                 <tr>
                     <td class="col-sm-1" style="vertical-align:middle;">
-                        <img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes"/> <h6>{{ submission.upvotes }} </h6>
-                        <h4 class="text-success">{{ submission.get_score }}</h4>
-                        <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes"/> <h6>{{ submission.downvotes }}</h6>
+                    <a href="{% url 'submission:submission_upvotes' pk=submission.pk %}"> 
+                    <img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes"/> </a> 
+                    <h6>{{ submission.upvotes }} </h6>
+                    <h4 class="text-success">{{ submission.get_score }}</h4>
+                    <a href="{% url 'submission:submission_downvotes' pk=submission.pk %}"> 
+                    <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes"/> </a> 
+                    <h6>{{ submission.downvotes }}</h6>
                     </td>
                     <td colspan=2> 
                         <h2>

@@ -39,3 +39,9 @@ class Submission(models.Model):
             return 0
             
         return (self.upvotes - self.downvotes)
+        
+    def get_upvotes(self):
+        return self.upvotes
+
+    def get_downvotes(self):
+        return self.downvotes

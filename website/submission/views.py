@@ -55,3 +55,21 @@ def submission_create(request):
     
     return render(request, 'submission/submission_create.html', {'form': form})
 
+def update_upvotes(request, pk):
+    submission = get_object_or_404(Submission, pk=pk)
+    upvote = submission.get_upvotes()
+    submission_vote = Submission.objects.filter(pk=submission.pk).update(upvotes=upvote+1)
+
+    return submission_list(request)
+
+def update_downvotes(request, pk):
+    submission = get_object_or_404(Submission, pk=pk)
+    downvote = submission.get_downvotes()
+    submission_vote = Submission.objects.filter(pk=submission.pk).update(downvotes=downvote+1)
+
+    return submission_list(request)
+
+
+
+
+
