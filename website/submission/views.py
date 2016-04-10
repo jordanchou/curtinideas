@@ -16,22 +16,22 @@ def submission_list(request):
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 def submission_list_upvotes(request):
-    submissions = Submission.objects.order_by('upvotes')
+    submissions = Submission.objects.order_by('-upvotes')
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 def submission_list_downvotes(request):
-    submissions = Submission.objects.order_by('downvotes')
+    submissions = Submission.objects.order_by('-downvotes')
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 def submission_list_num_views(request):
-    submissions = Submission.objects.order_by('num_views')
+    submissions = Submission.objects.order_by('-num_views')
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 def submission_list_author(request):
-    submissions = Submission.objects.order_by('author')
+    submissions = Submission.objects.order_by('-author')
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
