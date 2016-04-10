@@ -15,4 +15,3 @@ urlpatterns = [
                 url(r'^downvotes(?P<pk>\d+)/$', views.update_downvotes, name='submission_downvotes'),
                 url(r'^delete/(?P<pk>\d+)/$', views.submission_delete, name='submission_delete'),
               ]
-              
