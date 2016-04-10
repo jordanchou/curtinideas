@@ -2,17 +2,20 @@
 {% load staticfiles %}
 {% block content %}
 
-<h1>Discover Ideas<h1>
+<h1>Discover Ideas</h1>
 <div class="btn-toolbar">
-  <div class="btn-group">
-    <a href="/submission/" class="btn btn-default">Date</a>
-    <a href="submission/sort_by_views" class="btn btn-default">Views</a>
-    <a href="submission/sort_by_author" class="btn btn-default">Author</a>
-    <a href="submission/sort_by_score" class="btn btn-default">Score</a>
-    <a href="submission/sort_by_upvotes" class="btn btn-default">Upvotes</a>
-    <a href="submission/sort_by_downvotes" class="btn btn-default">Downvotes</a>
-  </div>
-</br></br>
+    <div class="btn-group">
+        <a href="/submission/" class="btn btn-default">Date</a>
+        <a href="submission/sort_by_views" class="btn btn-default">Views</a>
+        <a href="submission/sort_by_author" class="btn btn-default">Author</a>
+        <a href="submission/sort_by_score" class="btn btn-default">Score</a>
+        <a href="submission/sort_by_upvotes" class="btn btn-default">Upvotes</a>
+        <a href="submission/sort_by_downvotes" class="btn btn-default">Downvotes</a>
+</div>
+</br>
+</br>
+</br>
+
     {% for submission in submissions %}
     <div class="table-responsive">
         <table class="table table-striped table-hover ">
@@ -34,7 +37,7 @@
                     </td>
                     {% if user.email = submission.author.get_email %}
                     <td style="vertical-align:middle; text-align:right;">
-                        <a href="#" class="btn btn-warning col-sm-8">Edit</a>
+                        <a href="#" class="btn btn-warning">Edit</a>
                     </td>
                     <td style="vertical-align:middle; text-align:right;">
                         <a href="{% url 'submission:submission_delete' pk=submission.pk %}" class="btn btn-danger">Delete</a>
