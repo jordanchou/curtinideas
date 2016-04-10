@@ -11,7 +11,7 @@ def submission_detail(request, pk):
     return render(request, 'submission/submission_detail.html', {'submission': submission})
 
 def submission_list(request):
-    submissions = Submission.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    submissions = Submission.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
