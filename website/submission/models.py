@@ -17,22 +17,22 @@ class Submission(models.Model):
     downvotes = models.PositiveSmallIntegerField(default=0)
     num_views = models.PositiveSmallIntegerField(default=0)
     category = models.CharField(max_length=50)
-    submission_id = models.PositiveSmallIntegerField(null=True)
+    #submission_id = models.PositiveSmallIntegerField(null=True)
 
     def post(self):
         self.published_date = timezone.now()
         self.num_views = 0
         self.upvotes = 0
         self.downvotes = 0
-        self.submission_id = id + 1
+        #self.submission_id = id + 1
         id = id + 1
         self.save()
 
     def __str__(self):
         return self.title
 
-    def get_id(self):
-        return self.submission_id
+    #def get_id(self):
+    #    return self.submission_id
 
     def get_score(self):
         if ( (self.upvotes - self.downvotes) < 0 ):
@@ -47,4 +47,4 @@ class Submission(models.Model):
         return self.downvotes
 
     def delete_submission(self):
-        Submission.objects.filter(submission_id=self.submission_id).delete()
+        Submission.objects.filter(submission_id=self.pk).delete()
