@@ -45,3 +45,6 @@ class Submission(models.Model):
 
     def get_downvotes(self):
         return self.downvotes
+
+    def delete_submission(self):
+        Submission.objects.filter(submission_id=self.submission_id).delete()

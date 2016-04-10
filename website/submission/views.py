@@ -69,7 +69,16 @@ def update_downvotes(request, pk):
 
     return submission_list(request)
 
+def submission_delete(request, pk):
+    submission = get_object_or_404(Submission, pk=pk)
+    submission.delete_submission()
+    submissions = Submission.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
-
-
-
+#def submission_edit(request, id): 
+#    instance = Submission.objects.get(id=id)
+#    form = SubmissionForm(request.POST or None, instance=instance)
+#    if form.is_valid():
+#          form.save()
+#          return redirect('next_view')
+#    return direct_to_template(request, 'submission/submission_detail.html', {'form': form}  

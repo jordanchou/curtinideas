@@ -81,6 +81,11 @@ class CustomUser(AbstractBaseUser):
 
       return self.email 
 
+    def get_email(self):
+        # Return the user's email
+
+      return self.email 
+
     def has_perm(self, perm, obj=None):
         # Does user have a specific permission"
         
