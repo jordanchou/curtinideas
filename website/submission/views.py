@@ -72,7 +72,7 @@ def update_downvotes(request, pk):
 def submission_delete(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
     submission.delete_submission()
-    submissions = Submission.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    submissions = Submission.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 #def submission_edit(request, id): 
