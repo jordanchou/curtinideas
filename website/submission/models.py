@@ -51,7 +51,7 @@ class Submission(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey('submission.Submission', related_name='comments')
-    author = models.ForeignKey('accounts.Customuser')
+    author = models.ForeignKey('accounts.CustomUser')
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)

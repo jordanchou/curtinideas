@@ -1,7 +1,8 @@
 from .models import Submission
+from accounts.models import CustomUser
 from .forms import SubmissionForm, CommentForm
 from django.utils import timezone
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 #
@@ -84,13 +85,15 @@ def submission_delete(request, pk):
 #          return redirect('next_view')
 #    return direct_to_template(request, 'submission/submission_detail.html', {'form': form}
 
-def comment_on_submission(request, pk):
+def comment_on_submission(request, slug, pk):
     submission = get_object_or_404(Submission, pk=pk)
+    author = get_object_or_404(CustomUser, slug=slug)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.submission = submission
+            comment.author = author
             comment.save()
 
             return redirect('submission.views.submission_detail', pk=submission.pk)

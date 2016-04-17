@@ -13,7 +13,7 @@
         <p>{{ submission.text|linebreaks }}</p>
     </div>
 
-    <a class="btn btn-default" href="{% url 'submission:comment_on_submission' pk=submission.pk %}">Comment/Improvement</a>
+    <a class="btn btn-default" href="{% url 'submission:comment_on_submission' slug=user.slug pk=submission.pk %}">Comment/Improvement</a>
 
     <hr>
     {% for comment in post.comments.all %}
