@@ -1,10 +1,10 @@
 from .models import Submission
-from .forms import SubmissionForm
+from .forms import SubmissionForm, CommentForm
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
-# 
+#
 def submission_detail(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
 
@@ -48,11 +48,11 @@ def submission_create(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            
+
             return submission_list(request)
     else:
         form = SubmissionForm()
-    
+
     return render(request, 'submission/submission_create.html', {'form': form})
 
 def update_upvotes(request, pk):
@@ -72,14 +72,29 @@ def update_downvotes(request, pk):
 def submission_delete(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
     submission.delete()
-    
+
     submissions = Submission.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
-#def submission_edit(request, id): 
+#def submission_edit(request, id):
 #    instance = Submission.objects.get(id=id)
 #    form = SubmissionForm(request.POST or None, instance=instance)
 #    if form.is_valid():
 #          form.save()
 #          return redirect('next_view')
-#    return direct_to_template(request, 'submission/submission_detail.html', {'form': form}  
+#    return direct_to_template(request, 'submission/submission_detail.html', {'form': form}
+
+def comment_on_submission(request, pk):
+    submission = get_object_or_404(Submission, pk=pk)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.submission = submission
+            comment.save()
+
+            return redirect('submission.views.submission_detail', pk=submission.pk)
+    else:
+        form = CommentForm()
+
+    return render(request, 'submission/comment_on_submission.html', {'form' : form})
