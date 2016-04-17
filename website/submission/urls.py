@@ -2,6 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+                url(r'^submission/(?P<pk>\d+)/comment/$', views.comment_on_submission, name='comment_on_submission'),
                 url(r'^(?P<pk>\d+)/$', views.submission_detail, name='submission_detail'),
                 url(r'^$', views.submission_list, name = 'submission_list'),
                 url(r'^sort_by_date/$', views.submission_list, name = 'submission_list'),
@@ -14,5 +15,4 @@ urlpatterns = [
                 url(r'^upvotes(?P<pk>\d+)/$', views.update_upvotes, name='submission_upvotes'),
                 url(r'^downvotes(?P<pk>\d+)/$', views.update_downvotes, name='submission_downvotes'),
                 url(r'^delete/(?P<pk>.*)/$', views.submission_delete, name='submission_delete'),
-                url(r'^submission/(?P<pk>\d+)/comment/$', views.comment_on_submission, name='comment_on_submission'),
               ]
