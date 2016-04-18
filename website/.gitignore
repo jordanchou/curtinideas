@@ -1,4 +1,9 @@
+# Python Files
 *.pyc
 __pycache__
+
+#Virtualenv
 myvenv
+
+#Mac OS Files
 .DS_Store

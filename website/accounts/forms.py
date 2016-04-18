@@ -2,7 +2,10 @@ from django import forms
 from accounts.models import CustomUser
 from django.contrib.auth.forms import UserCreationForm
 
+#-----------------------------------------------------------------------------
+
 class RegistrationForm(UserCreationForm):
+
     first_name = forms.CharField(label='First Name', max_length=30)
     last_name = forms.CharField(label='Last Name', max_length=30)
     email = forms.EmailField(label='Email')
@@ -16,4 +19,4 @@ class RegistrationForm(UserCreationForm):
                   'password2')
     
 
-
+#-----------------------------------------------------------------------------

@@ -3,6 +3,8 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.template.defaultfilters import slugify
 
+#-----------------------------------------------------------------------------
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, first_name, last_name, email, sid, password=None, **args):
         '''
@@ -45,6 +47,8 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
+
+#-----------------------------------------------------------------------------
 
 class CustomUser(AbstractBaseUser):
     email = models.EmailField(
@@ -108,3 +112,5 @@ class CustomUser(AbstractBaseUser):
 
     def authenticated(self):
         return True
+
+#-----------------------------------------------------------------------------

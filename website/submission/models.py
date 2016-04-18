@@ -1,11 +1,11 @@
 from __future__ import unicode_literals
-
 from django.db import models
 from django.utils import timezone
 
 id = 0
 
-# Create your models here.
+#-----------------------------------------------------------------------------
+
 class Submission(models.Model):
     title = models.CharField(max_length=100)
     author = models.ForeignKey('accounts.CustomUser')
@@ -49,6 +49,8 @@ class Submission(models.Model):
     def delete_submission(self):
         Submission.objects.filter(submission_id=self.pk).delete()
 
+#-----------------------------------------------------------------------------
+
 class Comment(models.Model):
     submission = models.ForeignKey('submission.Submission', related_name='comments', default = 0)
     author = models.ForeignKey('accounts.CustomUser', default=0)
@@ -64,3 +66,5 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+#-----------------------------------------------------------------------------

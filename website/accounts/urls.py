@@ -4,6 +4,8 @@ from .views import RegistrationView, AccountDetailView, AccountUpdateView
 from django.contrib.auth import views
 from django.contrib.auth.views import login, logout, password_change, password_change_done
 
+#-----------------------------------------------------------------------------
+
 urlpatterns = [
                 url(r'^login/$', 'django.contrib.auth.views.login', name='login',
                     kwargs={'template_name': 'accounts/login.html'}
@@ -50,4 +52,4 @@ urlpatterns = [
                  url(r'^profile/edit/(?P<slug>.*)/$', AccountUpdateView.as_view(), name='get'),
                ]
                  
-            
+#-----------------------------------------------------------------------------            
