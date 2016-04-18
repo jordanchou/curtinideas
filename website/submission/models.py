@@ -50,8 +50,8 @@ class Submission(models.Model):
         Submission.objects.filter(submission_id=self.pk).delete()
 
 class Comment(models.Model):
-    post = models.ForeignKey('submission.Submission', related_name='comments')
-    author = models.ForeignKey('accounts.CustomUser')
+    submission = models.ForeignKey('submission.Submission', related_name='comments', default = 0)
+    author = models.ForeignKey('accounts.CustomUser', default=0)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
