@@ -96,7 +96,7 @@ def comment_on_submission(request, slug, pk):
             comment.author = author
             comment.save()
 
-            return redirect('submission.views.submission_detail', pk=submission.pk)
+            return render(request, 'submission/submission_detail.html', {'submission': submission})
     else:
         form = CommentForm()
 
