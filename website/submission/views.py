@@ -107,6 +107,20 @@ def submission_delete(request, pk):
 #          return redirect('next_view')
 #    return direct_to_template(request, 'submission/submission_detail.html', {'form': form}
 
+def submission_edit(request, pk):
+    submission = get_object_or_404(Submission, pk=pk)
+    if request.method == "POST":
+        form = SubmissionForm(request.POST, instance=submission)
+        if form.is_valid():
+            submission = form.save(commit=False)
+            submission.author = request.user
+            submission.published_date = timezone.now()
+            submission.save()
+            return redirect('/submission/', pk=submission.pk)
+    else:
+        form = SubmissionForm(instance=submission)
+    return render(request, 'submission/submission_create.html', {'form': form})
+
 #-----------------------------------------------------------------------------
 
 def comment_on_submission(request, slug, pk):

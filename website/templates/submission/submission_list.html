@@ -37,7 +37,7 @@
                     </td>
                     {% if user.email = submission.author.get_email %}
                     <td style="vertical-align:middle; text-align:right;">
-                        <a href="#" class="btn btn-warning">Edit</a>
+                        <a href="{% url 'submission:submission_edit' pk=submission.pk %}" class="btn btn-warning">Edit</a>
                     </td>
                     <td style="vertical-align:middle; text-align:right;">
                         <a href="{% url 'submission:submission_delete' pk=submission.pk %}" class="btn btn-danger">Delete</a>
