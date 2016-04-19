@@ -1,6 +1,6 @@
 # README #
 
-![Alt text](http://vignette1.wikia.nocookie.net/characters/images/9/98/Kermit-two1.jpg/revision/latest?cb=20130504163204)
+![Alt text](https://aasrn.files.wordpress.com/2015/06/curtin-logo.gif)
 
 ### Summary ###
 
