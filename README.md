@@ -1,6 +1,7 @@
 # README #
 
-![Alt text](http://vignette1.wikia.nocookie.net/characters/images/9/98/Kermit-two1.jpg/revision/latest?cb=20130504163204)
+![Alt text](https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Curtin_University_Logo.svg/1280px-Curtin_University_Logo.svg.png)
+
 
 ### Summary ###
 
