@@ -127,3 +127,11 @@ def comment_on_submission(request, slug, pk):
     return render(request, 'submission/comment_on_submission.html', {'form' : form})
 
 #-----------------------------------------------------------------------------
+
+def comment_delete(request, pk1, pk2):
+    comment = get_object_or_404(Comment, pk=pk2)
+    comment.delete_comment()
+
+    submission = get_object_or_404(Submission, pk=pk1)
+
+    return render(request, 'submission/submission_detail.html', {'submission': submission})
