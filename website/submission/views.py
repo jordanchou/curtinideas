@@ -150,4 +150,5 @@ def comment_delete(request, pk):
     submission = comment.submission.pk
     comment.delete()
 
-    return redirect('submission.views.submission_detail', pk=submission)
+    submission = get_object_or_404(Submission, pk=submission)
+    return render(request, 'submission/submission_detail.html', {'submission' : submission})
