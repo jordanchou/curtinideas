@@ -1,4 +1,4 @@
-from .models import Submission
+from .models import Submission, Comment
 from accounts.models import CustomUser
 from .forms import SubmissionForm, CommentForm
 from django.utils import timezone
@@ -47,6 +47,12 @@ def submission_list_author(request):
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 #-----------------------------------------------------------------------------
+#
+def submission_list_score(request):
+    submissions = list(Submission.objects.all())
+    submissions = sorted(submissions, key = lambda s:s.get_score(), reverse=True)
+
+    return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 def submission_list_self(request, slug):
     submissions = Submission.objects.filter(author__email=slug)
@@ -99,13 +105,19 @@ def submission_delete(request, pk):
 
 #-----------------------------------------------------------------------------
 
-#def submission_edit(request, id):
-#    instance = Submission.objects.get(id=id)
-#    form = SubmissionForm(request.POST or None, instance=instance)
-#    if form.is_valid():
-#          form.save()
-#          return redirect('next_view')
-#    return direct_to_template(request, 'submission/submission_detail.html', {'form': form}
+def submission_edit(request, pk):
+    submission = get_object_or_404(Submission, pk=pk)
+    if request.method == "POST":
+        form = SubmissionForm(request.POST, instance=submission)
+        if form.is_valid():
+            submission = form.save(commit=False)
+            submission.author = request.user
+            submission.published_date = timezone.now()
+            submission.save()
+            return redirect('/submission/', pk=submission.pk)
+    else:
+        form = SubmissionForm(instance=submission)
+    return render(request, 'submission/submission_create.html', {'form': form})
 
 #-----------------------------------------------------------------------------
 
@@ -128,10 +140,44 @@ def comment_on_submission(request, slug, pk):
 
 #-----------------------------------------------------------------------------
 
-def comment_delete(request, pk1, pk2):
-    comment = get_object_or_404(Comment, pk=pk2)
-    comment.delete_comment()
 
-    submission = get_object_or_404(Submission, pk=pk1)
+def comment_edit(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    submission = get_object_or_404(Submission, pk=comment.submission.pk)
 
-    return render(request, 'submission/submission_detail.html', {'submission': submission})
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.submission = submission
+            comment.author = request.user
+            comment.save()
+            return render(request, 'submission/submission_detail.html', {'submission': submission})
+    else:
+        form = CommentForm(instance=comment)
+    return render(request, 'submission/comment_on_submission.html', {'form' : form})
+
+#-----------------------------------------------------------------------------
+
+def comment_delete(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    submission = comment.submission.pk
+    comment.delete()
+
+    submission = get_object_or_404(Submission, pk=submission)
+    return render(request, 'submission/submission_detail.html', {'submission' : submission})
+
+def submission_list_science_and_eng(request):
+    submissions = Submission.objects.filter(category = "Science and Engineering")
+
+    return render(request, 'submission/submission_list.html', {'submissions': submissions})
+
+def submission_list_health_sciences(request):
+    submissions = Submission.objects.filter(category = "Health Sciences")
+
+    return render(request, 'submission/submission_list.html', {'submissions': submissions})
+
+def submission_list_humanities(request):
+    submissions = Submission.objects.filter(category = "Humanities")
+
+    return render(request, 'submission/submission_list.html', {'submissions': submissions})

@@ -2,6 +2,11 @@ from django import forms
 from .models import Submission, Comment
 from django.contrib.admin import widgets as aw
 
+CATEGORIES = (
+    ('Science and Engineering', 'Science and Engineering'),
+    ('Health Sciences', 'Health Sciences'),
+    ('Humanities', 'Humanities'),
+)
 #-----------------------------------------------------------------------------
 
 class SubmissionForm(forms.ModelForm):
@@ -12,6 +17,7 @@ class SubmissionForm(forms.ModelForm):
     text = forms.CharField( widget=forms.Textarea(attrs={'class' : 'form-control', 'cols':15, 'rows': 15}),
                             required=False)
 
+    category = forms.ChoiceField(choices=CATEGORIES, required=True)
     class Meta:
         model = Submission
         fields = ('title', 'text', 'category')

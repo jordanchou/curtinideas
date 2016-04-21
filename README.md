@@ -1,6 +1,6 @@
 # README #
 
-![Alt text](https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Curtin_University_Logo.svg/1280px-Curtin_University_Logo.svg.png)
+![Alt text](https://aasrn.files.wordpress.com/2015/06/curtin-logo.gif)
 
 
 ### Summary ###
