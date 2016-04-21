@@ -43,6 +43,7 @@ urlpatterns = [
                     'template_name': 'registration/initial_confirm.html',
                     'post_reset_redirect': 'accounts:register-complete',
                 }, name='register-confirm'),
+                
                 url(r'^register/complete/$', 
                 views.password_reset_complete, {
                 'template_name': 'registration/.html',

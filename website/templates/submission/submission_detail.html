@@ -25,7 +25,7 @@
 		<div id="comments" class="tab-pane fade in active">
 			<h3>Comments</h3>
 			{% for comment in submission.comments.all %}
-			{% if not improvement %}
+			{% if not comment.is_improvement %}
 			<div class="table-responsive">
 				<table class="table table-striped table-hover ">
 					<tbody>
@@ -59,7 +59,7 @@
 		<div id="improvements" class="tab-pane fade">
 			<h3>Improvements</h3>
 			{% for comment in submission.comments.all %}
-			{% if improvement %}
+			{% if comment.is_improvement %}
 			<div class="table-responsive">
 				<table class="table table-striped table-hover ">
 					<tbody>

@@ -5,6 +5,11 @@ from django.utils import timezone
 id = 0
 
 #-----------------------------------------------------------------------------
+CATEGORIES = (
+    ('Science and Engineering', 'Science and Engineering'),
+    ('Health Sciences', 'Health Sciences'),
+    ('Humanities', 'Humanities'),
+)
 
 class Submission(models.Model):
     title = models.CharField(max_length=100)
@@ -16,7 +21,7 @@ class Submission(models.Model):
     upvotes = models.PositiveSmallIntegerField(default=0)
     downvotes = models.PositiveSmallIntegerField(default=0)
     num_views = models.PositiveSmallIntegerField(default=0)
-    category = models.CharField(max_length=50)
+    category = models.CharField(max_length=30, choices=CATEGORIES)
 
     def post(self):
         self.published_date = timezone.now()

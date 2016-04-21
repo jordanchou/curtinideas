@@ -41,9 +41,6 @@ def submission_list_num_views(request):
 
 #-----------------------------------------------------------------------------
 
-#[submission_list_author description]
-#@param  {[type]} request [description]
-#@return {[type]}         [description]
 def submission_list_author(request):
     submissions = Submission.objects.order_by('-author')
 
@@ -163,3 +160,18 @@ def comment_delete(request, pk):
 
     submission = get_object_or_404(Submission, pk=submission)
     return render(request, 'submission/submission_detail.html', {'submission' : submission})
+
+def submission_list_science_and_eng(request):
+    submissions = Submission.objects.filter(category = "Science and Engineering")
+
+    return render(request, 'submission/submission_list.html', {'submissions': submissions})
+
+def submission_list_health_sciences(request):
+    submissions = Submission.objects.filter(category = "Health Sciences")
+
+    return render(request, 'submission/submission_list.html', {'submissions': submissions})
+
+def submission_list_humanities(request):
+    submissions = Submission.objects.filter(category = "Humanities")
+
+    return render(request, 'submission/submission_list.html', {'submissions': submissions})
