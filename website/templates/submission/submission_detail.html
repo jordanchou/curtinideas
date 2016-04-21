@@ -42,7 +42,7 @@
 									<a href="{% url 'submission:comment_edit' pk=comment.pk %}" class="btn btn-warning">Edit</a>
 								</td>
 								<td style="vertical-align:middle; text-align:right;">
-									<a href="{% url 'submission:comment_delete' pk1=submission.pk pk2=comment.pk %}" class="btn btn-danger">Delete</a>
+									<a href="{% url 'submission:comment_delete' pk=comment.pk %}" class="btn btn-danger">Delete</a>
 								</td>
 							{% else %}
 								<td></td>
@@ -76,7 +76,7 @@
 									<a href="{% url 'submission:comment_edit' pk=comment.pk %}" class="btn btn-warning">Edit</a>
 								</td>
 								<td style="vertical-align:middle; text-align:right;">
-									<a href="{% url 'submission:comment_delete' pk1=submission.pk pk2=comment.pk %}" class="btn btn-danger">Delete</a>
+									<a href="{% url 'submission:comment_delete' pk=comment.pk %}" class="btn btn-danger">Delete</a>
 								</td>
 							{% else %}
 								<td></td>

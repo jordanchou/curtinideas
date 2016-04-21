@@ -41,6 +41,9 @@ def submission_list_num_views(request):
 
 #-----------------------------------------------------------------------------
 
+#[submission_list_author description]
+#@param  {[type]} request [description]
+#@return {[type]}         [description]
 def submission_list_author(request):
     submissions = Submission.objects.order_by('-author')
 
@@ -134,6 +137,7 @@ def comment_on_submission(request, slug, pk):
 
 #-----------------------------------------------------------------------------
 
+
 def comment_edit(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     submission = get_object_or_404(Submission, pk=comment.submission.pk)
@@ -152,10 +156,10 @@ def comment_edit(request, pk):
 
 #-----------------------------------------------------------------------------
 
-def comment_delete(request, pk1, pk2):
-    comment = get_object_or_404(Comment, pk=pk2)
-    comment.delete_comment()
+def comment_delete(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    submission = comment.submission.pk
+    comment.delete()
 
-    submission = get_object_or_404(Submission, pk=pk1)
-
-    return render(request, 'submission/submission_detail.html', {'submission': submission})
+    submission = get_object_or_404(Submission, pk=submission)
+    return render(request, 'submission/submission_detail.html', {'submission' : submission})
