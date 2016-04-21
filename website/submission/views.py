@@ -47,6 +47,12 @@ def submission_list_author(request):
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 #-----------------------------------------------------------------------------
+#
+def submission_list_score(request):
+    submissions = list(Submission.objects.all())
+    submissions = sorted(submissions, key = lambda s:s.get_score(), reverse=True)
+
+    return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 def submission_list_self(request, slug):
     submissions = Submission.objects.filter(author__email=slug)

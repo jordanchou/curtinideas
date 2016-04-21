@@ -12,6 +12,7 @@ urlpatterns = [
                 url(r'^sort_by_upvotes/$', views.submission_list_upvotes, name = 'submission_list_upvotes'),
                 url(r'^sort_by_downvotes/$', views.submission_list_downvotes, name = 'submission_list_downvotes'),
                 url(r'^sort_by_views/$', views.submission_list_num_views, name = 'submission_list_num_views'),
+                url(r'^sort_by_score/$', views.submission_list_score, name = 'submission_list_score'),
                 url(r'^submit/$', views.submission_create, name='submission_create'),
                 url(r'^submission/(?P<slug>.*)/$', views.submission_list_self, name='account_submission'),
                 url(r'^upvotes(?P<pk>\d+)/$', views.update_upvotes, name='submission_upvotes'),
