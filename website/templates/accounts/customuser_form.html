@@ -1,6 +1,9 @@
 {% extends "base.html" %}
-{% block title %}User Registration{% endblock %}
-{% block head %}User Registration{% endblock %}
+
+{% block title %} User Registration {% endblock %}
+
+{% block head %} User Registration {% endblock %}
+
 {% block content %}
     <form method="post" action=".">{% csrf_token %}
         <table border="0">
@@ -8,11 +11,5 @@
         </table>
         <input type="submit" value="Register" />
     </form>
-        </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    
+
 {% endblock %}

@@ -11,26 +11,32 @@
         <a href="/submission/sort_by_score" class="btn btn-default">Score</a>
         <a href="/submission/sort_by_upvotes" class="btn btn-default">Upvotes</a>
         <a href="/submission/sort_by_downvotes" class="btn btn-default">Downvotes</a>
+	</div>
 </div>
+
 </br>
 </br>
 </br>
 
     {% for submission in submissions %}
+		<!-- If No Submissions To List -->
+		{% if forloop.counter == 0 %}
+			<img src="{% static "submission/tromp.jpg" %}">
+		{% endif %}
     <div class="table-responsive">
         <table class="table table-striped table-hover ">
             <tbody>
                 <tr>
                     <td class="col-sm-1" style="vertical-align:middle;">
-                    <a href="{% url 'submission:submission_upvotes' pk=submission.pk %}"> 
-                    <img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes"/> </a> 
+                    <a href="{% url 'submission:submission_upvotes' pk=submission.pk %}">
+                    <img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes"/> </a>
                     <h6>{{ submission.upvotes }} </h6>
                     <h4 class="text-success">{{ submission.get_score }}</h4>
-                    <a href="{% url 'submission:submission_downvotes' pk=submission.pk %}"> 
-                    <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes"/> </a> 
+                    <a href="{% url 'submission:submission_downvotes' pk=submission.pk %}">
+                    <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes"/> </a>
                     <h6>{{ submission.downvotes }}</h6>
                     </td>
-                    <td colspan='3'> 
+                    <td colspan='3'>
                         <h2>
                             <a href="{% url 'submission:submission_detail' pk=submission.pk %}">{{ submission.title }}</a>
                         </h2>
@@ -41,7 +47,7 @@
                     </td>
                     <td style="vertical-align:middle; text-align:right;">
                         <a href="{% url 'submission:submission_delete' pk=submission.pk %}" class="btn btn-danger">Delete</a>
-                    </td>                    
+                    </td>
                     {% else %}
                       <td></td>
                     {% endif %}
@@ -61,7 +67,7 @@
                     </td>
                 </tr>
             </tbody>
-        </table> 
+        </table>
     </div>
     </br>
     {% endfor %}
