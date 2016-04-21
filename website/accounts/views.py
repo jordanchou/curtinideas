@@ -14,12 +14,11 @@ class RegistrationView(CreateView):
 
     def form_valid(self, form):
         obj = form.save(commit=False)
-        obj.set_password(CustomUser.objects.make_random_password())
         obj.save()
 
         #reset_form = PasswordResetForm(self.request.POST)
         #reset_form.is_valid()
-        
+
         # Copied from django/contrib/auth/views.py : password_reset
         #opts = {
         #   'use_https': self.request.is_secure(),
@@ -35,7 +34,7 @@ class RegistrationView(CreateView):
         return HttpResponse(template.render())
 
 class AccountDetailView(DetailView):
-    
+
     model = CustomUser
 
     def get_context_data(self, **kwargs):
