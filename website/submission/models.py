@@ -60,7 +60,7 @@ class Comment(models.Model):
     def __str__(self):
         return self.text
 
-    def delete_comment(self):
-        Comment.objects.filter(self.pk).delete()
+#    def delete_comment(self):
+#        Comment.objects.filter(self.pk).delete()
 
 #-----------------------------------------------------------------------------

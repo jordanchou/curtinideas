@@ -17,7 +17,7 @@ urlpatterns = [
                 url(r'^upvotes(?P<pk>\d+)/$', views.update_upvotes, name='submission_upvotes'),
                 url(r'^downvotes(?P<pk>\d+)/$', views.update_downvotes, name='submission_downvotes'),
                 url(r'^delete/(?P<pk>.*)/$', views.submission_delete, name='submission_delete'),
-                url(r'^submission/(?P<pk1>.*)/delete/(?P<pk2>.*)/$', views.comment_delete, name='comment_delete'),
+                url(r'^submission/delete/(?P<pk>.*)/$', views.comment_delete, name='comment_delete'),
                 url(r'^edit/(?P<pk>.*)/', views.submission_edit, name='submission_edit'),
               ]
 
