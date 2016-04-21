@@ -102,14 +102,6 @@ def submission_delete(request, pk):
 
 #-----------------------------------------------------------------------------
 
-#def submission_edit(request, id):
-#    instance = Submission.objects.get(id=id)
-#    form = SubmissionForm(request.POST or None, instance=instance)
-#    if form.is_valid():
-#          form.save()
-#          return redirect('next_view')
-#    return direct_to_template(request, 'submission/submission_detail.html', {'form': form}
-
 def submission_edit(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
     if request.method == "POST":
@@ -141,6 +133,25 @@ def comment_on_submission(request, slug, pk):
     else:
         form = CommentForm()
 
+    return render(request, 'submission/comment_on_submission.html', {'form' : form})
+
+#-----------------------------------------------------------------------------
+
+
+def comment_edit(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    submission = get_object_or_404(Submission, pk=comment.submission.pk)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.submission = submission
+            comment.author = request.user
+            comment.save()
+            return render(request, 'submission/submission_detail.html', {'submission': submission})
+    else:
+        form = CommentForm(instance=comment)
     return render(request, 'submission/comment_on_submission.html', {'form' : form})
 
 #-----------------------------------------------------------------------------
