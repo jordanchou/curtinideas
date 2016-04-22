@@ -11,7 +11,7 @@ class CustomUserManager(BaseUserManager):
         Creates and saves a User with the given email, first name, last name, sid
         and password.
         '''
-    
+
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -22,7 +22,7 @@ class CustomUserManager(BaseUserManager):
                         sid=sid
                         )
 
-        user.slug = user.email
+        user.slug = slugify(user.email)
 
         user.set_password(password)
         user.save(using=self._db)
@@ -35,10 +35,10 @@ class CustomUserManager(BaseUserManager):
         , sid and password
         '''
 
-        user = self.create_user( 
-                                first_name=first_name, 
+        user = self.create_user(
+                                first_name=first_name,
                                 last_name=last_name,
-                                email=email, 
+                                email=email,
                                 sid=sid,
                                 password=password
                                )
@@ -63,7 +63,7 @@ class CustomUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    slug = models.SlugField(max_length = 100, null = True)
+    slug = models.SlugField(max_length = 255, null = False)
 
     objects = CustomUserManager()
 
@@ -83,21 +83,21 @@ class CustomUser(AbstractBaseUser):
     def __str__(self):
         # Return the user's email
 
-      return self.email 
+      return self.email
 
     def get_email(self):
         # Return the user's email
 
-      return self.email 
+      return self.email
 
     def has_perm(self, perm, obj=None):
         # Does user have a specific permission"
-        
+
         return True;
 
     @property
     def is_staff(self):
-        
+
         return self.is_admin
 
     @property

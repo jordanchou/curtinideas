@@ -14,6 +14,7 @@ class RegistrationView(CreateView):
 
     def form_valid(self, form):
         obj = form.save(commit=False)
+        obj.slug = obj.email
         obj.save()
 
         #reset_form = PasswordResetForm(self.request.POST)
