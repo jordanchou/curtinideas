@@ -22,7 +22,7 @@ class CustomUserManager(BaseUserManager):
                         sid=sid
                         )
 
-        user.slug = slugify(user.email)
+        user.slug =(user.email)
 
         user.set_password(password)
         user.save(using=self._db)
