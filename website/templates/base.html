@@ -22,11 +22,13 @@
                             <li class="active"><a href="/about_us">About Us <span class="sr-only">(current)</span></a></li>
 
                   </ul>
-                  <form method='GET' action="/submission/search/" class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Search submissions">
+                  <form class="navbar-form navbar-left" id="searchform" action="{% url 'submission:submission_search' %}" method="get" accept-charset="utf-8">
+                    <div class="form-group"
+                        <button class="searchbutton" type="submit">
+                          <i class="fa fa-search"></i>
+                        <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+                        <button type="submit" class="btn btn-default">Submit</button>
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
                   </form>
 
                   {% if user.is_authenticated %}

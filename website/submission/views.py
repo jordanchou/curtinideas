@@ -3,6 +3,7 @@ from accounts.models import CustomUser
 from .forms import SubmissionForm, CommentForm
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response, RequestContext
+from . import searchfunctions
 
 #-----------------------------------------------------------------------------
 
@@ -196,9 +197,9 @@ def search(request):
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
 
-        entry_query = get_query(query_string, ['title', 'text',])
+        entry_query = searchfunctions.get_query(query_string, ['title', 'text'])
 
-        submissions = Submission.objects.filter(entry_query).order_by('-pub_date')
+        submissions = Submission.objects.filter(entry_query).order_by('-published_date')
 
     return render_to_response('submission/submission_list.html',
                           { 'submissions': submissions },
