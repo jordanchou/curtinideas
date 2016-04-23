@@ -22,6 +22,7 @@ class Submission(models.Model):
     downvotes = models.PositiveSmallIntegerField(default=0)
     num_views = models.PositiveSmallIntegerField(default=0)
     category = models.CharField(max_length=30, choices=CATEGORIES)
+    links = models.CharField(max_length=200, null=True)
 
     def post(self):
         self.published_date = timezone.now()
@@ -48,6 +49,8 @@ class Submission(models.Model):
 
     def increase_view(self):
         self.num_views = self.num_views + 1
+    def get_links(self):
+    	return self.links
 
 #-----------------------------------------------------------------------------
 

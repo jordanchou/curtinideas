@@ -8,8 +8,11 @@
 			{% endif %}
 			<h1>{{ submission.title }}</h1>
 			<h2>{{submission.author.get_full_name }}</h2>
-			<h2>{{submision.category}}</h2>
+			<h2>{{submission.category}}</h2>
 			<p>{{ submission.text|linebreaks }}</p>
+			<h4>Links</h4>
+			<a target="_blank" href="{{ submission.links }}">{{ submission.links }}</a>
+
 	</div>
 	{% if user.is_authenticated %}
 	<a class="btn btn-default" href="{% url 'submission:comment_on_submission' slug=user.slug pk=submission.pk %}">Comment/Improvement</a>
