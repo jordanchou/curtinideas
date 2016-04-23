@@ -24,6 +24,7 @@ urlpatterns = [
                 url(r'^filter_by_science_and_eng/$', views.submission_list_science_and_eng, name = 'submission_list_science_and_eng'),
                 url(r'^filter_by_health_sciences/$', views.submission_list_health_sciences, name = 'submission_list_health_sciences'),
                 url(r'^filter_by_humanities/$', views.submission_list_humanities, name = 'submission_list_humanities'),
+                url(r'^search/$', views.search, name = 'submission_search'),
               ]
 
 #-----------------------------------------------------------------------------

@@ -46,6 +46,8 @@ class Submission(models.Model):
     def get_downvotes(self):
         return self.downvotes
 
+    def increase_view(self):
+        self.num_views = self.num_views + 1
 
 #-----------------------------------------------------------------------------
 

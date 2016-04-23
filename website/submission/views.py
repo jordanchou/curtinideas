@@ -2,12 +2,16 @@ from .models import Submission, Comment
 from accounts.models import CustomUser
 from .forms import SubmissionForm, CommentForm
 from django.utils import timezone
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response, RequestContext
 
 #-----------------------------------------------------------------------------
 
 def submission_detail(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
+
+    submission.increase_view()
+
+    submission.save()
 
     return render(request, 'submission/submission_detail.html', {'submission': submission})
 
@@ -181,3 +185,21 @@ def submission_list_humanities(request):
     submissions = Submission.objects.filter(category = "Humanities")
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
+
+
+
+
+################## search
+def search(request):
+    query_string = ''
+    submissions = None
+    if ('q' in request.GET) and request.GET['q'].strip():
+        query_string = request.GET['q']
+
+        entry_query = get_query(query_string, ['title', 'text',])
+
+        submissions = Submission.objects.filter(entry_query).order_by('-pub_date')
+
+    return render_to_response('submission/submission_list.html',
+                          { 'submissions': submissions },
+                          context_instance=RequestContext(request))
