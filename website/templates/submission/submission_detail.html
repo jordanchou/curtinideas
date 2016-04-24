@@ -8,7 +8,11 @@
 					</div>
 			{% endif %}
 			<h2>{{ submission.title }}</h2>
-			<h3><small>{{submission.author.get_full_name }}</small></h3>
+			<h3><small>{{submission.author.get_full_name}} 
+				{% if submission.author.is_superuser %}
+					<span class="label label-danger">Admin</span>
+				{% endif %}
+			</small></h3>
 			<h5>{{submission.category}}</h5>
 			<p>{{ submission.text|linebreaks }}</p>
 			{% if submission.links %}
@@ -49,6 +53,9 @@
 								<div class="comment">
 									<div class="date">{{ comment.created_date }}</div>
 									<strong>{{comment.author}}</strong>
+									{% if comment.author.is_superuser%}
+										<span class="label label-danger">Admin</span></small></h3>
+									{% endif %}
 									<p>{{ comment.text|linebreaks }}</p>
 								</div>
 							</td>
@@ -94,6 +101,9 @@
 								<div class="comment">
 									<div class="date">{{ comment.created_date }}</div>
 									<strong>{{comment.author}}</strong>
+									{% if comment.author.is_superuser %}
+										<span class="label label-danger">Admin</span></small></h3>
+									{% endif %}
 									<p>{{ comment.text|linebreaks }}</p>
 								</div>
 							</td>
