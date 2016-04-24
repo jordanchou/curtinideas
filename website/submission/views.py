@@ -206,18 +206,18 @@ def search(request):
                           context_instance=RequestContext(request))
 
 
-def update_upvotes(request, pk):
+def update_comment_upvotes(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     upvote = comment.upvotes
     comment_vote = Comment.objects.filter(pk=comment.pk).update(upvotes=upvote+1)
-
-    return submission_detail(request)
+    submission = comment.submission
+    return render(request, 'submission/submission_detail.html', {'submission': submission})
 
 #-----------------------------------------------------------------------------
 
-def update_downvotes(request, pk):
+def update_comment_downvotes(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
-    downvote = comment.get_downvotes()
+    downvote = comment.downvotes
     comment_vote = Comment.objects.filter(pk=comment.pk).update(downvotes=downvote+1)
-
-    return submission_detail(request)
+    submission = comment.submission
+    return render(request, 'submission/submission_detail.html', {'submission': submission})

@@ -73,6 +73,11 @@ class Comment(models.Model):
     def __str__(self):
         return self.text
 
+    def get_score(self):
+        if ( (self.upvotes - self.downvotes) < 0 ):
+            return 0
+
+        return (self.upvotes - self.downvotes)
 #    def delete_comment(self):
 #        Comment.objects.filter(self.pk).delete()
 

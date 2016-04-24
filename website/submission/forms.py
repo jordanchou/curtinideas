@@ -19,7 +19,9 @@ class SubmissionForm(forms.ModelForm):
 
     category = forms.ChoiceField(choices=CATEGORIES, required=True)
 
-    #link = forms.CharField( max_length=200, required=False)
+    links = forms.CharField( max_length=200, 
+                             widget=forms.TextInput(attrs={'class' : 'form-control'}),
+                             required=False)
     class Meta:
         model = Submission
         fields = ('title', 'text', 'category', 'links')
