@@ -62,6 +62,9 @@ class Comment(models.Model):
     approved_comment = models.BooleanField(default=False)
     is_improvement = models.BooleanField(default=False)
     edited = models.BooleanField(default=False)
+    upvotes = models.PositiveSmallIntegerField(default=0)
+    downvotes = models.PositiveSmallIntegerField(default=0)
+
 
     def approve(self):
         self.approved_comment = True
