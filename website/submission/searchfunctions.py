@@ -2,6 +2,8 @@ import re
 
 from django.db.models import Q
 
+#-----------------------------------------------------------------------------
+
 def normalize_query(query_string,
                     findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
                     normspace=re.compile(r'\s{2,}').sub):
@@ -14,6 +16,8 @@ def normalize_query(query_string,
 
     '''
     return [normspace(' ', (t[0] or t[1]).strip()) for t in findterms(query_string)]
+
+#-----------------------------------------------------------------------------
 
 def get_query(query_string, search_fields):
     ''' Returns a query, that is a combination of Q objects. That combination
@@ -35,3 +39,5 @@ def get_query(query_string, search_fields):
         else:
             query = query & or_query
     return query
+
+#-----------------------------------------------------------------------------

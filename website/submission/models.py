@@ -78,7 +78,66 @@ class Comment(models.Model):
             return 0
 
         return (self.upvotes - self.downvotes)
+
+    def get_upvotes(self):
+        return self.upvotes
+
+    def get_downvotes(self):
+        return self.downvotes
+
 #    def delete_comment(self):
 #        Comment.objects.filter(self.pk).delete()
 
+#-----------------------------------------------------------------------------
+
+class SubVoting(models.Model):
+    submission = models.ForeignKey('submission.Submission', related_name='subvotes', default = 0)
+    voter = models.ForeignKey('accounts.CustomUser')
+    upvote = models.BooleanField(default=False)
+    downvote = models.BooleanField(default=False)
+
+    def create_sub_up_vote(self, submission, voter):
+        self.submission = submission
+        self.voter = voter
+        self.upvote = True
+        self.save()
+
+    def create_sub_down_vote(self, submission, voter):
+        self.submission = submission
+        self.voter = voter
+        self.downvote = True
+        self.save()
+
+    def __str__(self):
+        identifier = "SUBMISSION: " + self.submission.title + "USER: " + self.voter.email  
+        return identifier       
+        
+#-----------------------------------------------------------------------------
+
+class ComVoting(models.Model):
+    submission = models.ForeignKey('submission.Submission', related_name='comvotes', default = 0)
+    comment = models.ForeignKey('submission.Comment', related_name='comvotes', default = 0)
+    voter = models.ForeignKey('accounts.CustomUser')
+    upVote = models.BooleanField(default=False)
+    downVote = models.BooleanField(default=False)
+
+    def create_com_up_vote(self, comment, voter):
+        self.submission = comment.submission
+        self.comment = comment
+        self.voter = voter
+        self.upvote = True
+        self.save()
+
+    def create_com_down_vote(self, comment, voter):
+        self.submission = comment.submission
+        self.comment = comment
+        self.voter = voter
+        self.downvote = True
+        self.save()
+
+    def __str__(self):
+        identifier = " SUBMISSION: " + self.submission.title + " COMMENT: " + str(self.comment.pk)
+        identifier = identifier + " USER: " + self.voter.email 
+        return identifier   
+        
 #-----------------------------------------------------------------------------

@@ -37,11 +37,11 @@
 					<tbody>
 						<tr>
 							<td class="col-sm-1" style="vertical-align:middle;">
-			                    <a href="{% url 'submission:comment_upvotes' pk=comment.pk %}">
+			                    <a href="{% url 'submission:comment_upvotes' slug=user.slug pk=comment.pk %}">
 			                    <img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes"/> </a>
 			                    <h6>{{ comment.upvotes }} </h6>
 			                    <h4 class="text-success">{{ comment.get_score }}</h4>
-			                    <a href="{% url 'submission:comment_downvotes' pk=comment.pk %}">
+			                    <a href="{% url 'submission:comment_downvotes' slug=user.slug pk=comment.pk %}">
 			                    <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes"/> </a>
 			                    <h6>{{ comment.downvotes }}</h6>
 		                    </td>
@@ -82,11 +82,11 @@
 					<tbody>
 						<tr>
 		                    <td class="col-sm-1" style="vertical-align:middle;">
-			                    <a href="{% url 'submission:comment_upvotes' pk=comment.pk %}">
+			                    <a href="{% url 'submission:comment_upvotes' slug=user.slug pk=comment.pk %}">
 			                    <img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes"/> </a>
 			                    <h6>{{ comment.upvotes }} </h6>
 			                    <h4 class="text-success">{{ comment.get_score }}</h4>
-			                    <a href="{% url 'submission:comment_downvotes' pk=comment.pk %}">
+			                    <a href="{% url 'submission:comment_downvotes' slug=user.slug pk=comment.pk %}">
 			                    <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes"/> </a>
 			                    <h6>{{ comment.downvotes }}</h6>
 		                    </td>
