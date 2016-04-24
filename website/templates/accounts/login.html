@@ -1,9 +1,11 @@
 {% extends "base.html" %}
+
 {% block content %}
 
     {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
+    
     <form method="post" action="{% url 'accounts:login' %}">
         {% csrf_token %}
         <table>
@@ -16,19 +18,5 @@
     <a href="/accounts/register">Haven't got an account? Register here</a>
     <br>
     <a href="/accounts/password_change">Forgot password? Click here</a>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-
 
 {% endblock %}
