@@ -204,3 +204,20 @@ def search(request):
     return render_to_response('submission/submission_list.html',
                           { 'submissions': submissions },
                           context_instance=RequestContext(request))
+
+
+def update_upvotes(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    upvote = comment.upvotes
+    comment_vote = Comment.objects.filter(pk=comment.pk).update(upvotes=upvote+1)
+
+    return submission_detail(request)
+
+#-----------------------------------------------------------------------------
+
+def update_downvotes(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    downvote = comment.get_downvotes()
+    comment_vote = Comment.objects.filter(pk=comment.pk).update(downvotes=downvote+1)
+
+    return submission_detail(request)

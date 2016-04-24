@@ -25,6 +25,8 @@ urlpatterns = [
                 url(r'^filter_by_health_sciences/$', views.submission_list_health_sciences, name = 'submission_list_health_sciences'),
                 url(r'^filter_by_humanities/$', views.submission_list_humanities, name = 'submission_list_humanities'),
                 url(r'^search/$', views.search, name = 'submission_search'),
+                url(r'^/comment/upvotes(?P<pk>\d+)/$', views.update_comment_upvotes, name='comment_upvotes'),
+                url(r'^/comment/downvotes(?P<pk>\d+)/$', views.update_comment_downvotes, name='comment_downvotes'),
               ]
 
 #-----------------------------------------------------------------------------
