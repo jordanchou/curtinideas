@@ -1,8 +1,9 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-      <link href="/static/style.css" type="text/css" rel="stylesheet" />
+  <link href="/static/style.css" type="text/css" rel="stylesheet" />
 </head>
 
 
@@ -20,6 +21,7 @@
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </button>
+         <img class="img-responsive" src="{% static "curtinlogo.png" %}" align="left" alt="CurtinIdeas"/>
          <a class="navbar-brand" href="/">CurtinIdeas</a>
          </div>
 
@@ -59,7 +61,7 @@
                 <li><a href="{% url 'submission:account_submission' slug=user.slug %}">My Submissions</a></li>
                 <li><a href="{% url 'accounts:account_detail' slug=user.slug %}">My Account</a></li>
                 <li><a href="/accounts/logout">Logout</a></li>
-             </ul>
+            </ul>
             {% else %}
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/accounts/register">Sign Up</a></li>
@@ -67,9 +69,9 @@
             </ul>
             {% endif %}
 
-                </div>
-              </div>
-            </nav>
+          </div>
+        </div>
+      </nav>
 
 
 
