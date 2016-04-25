@@ -27,8 +27,17 @@ Visit the following url:
 
     http://127.0.0.1:8000
 
+To create an admin user:
+
+    python3 manage.py createsuperuser
+
+Visit the following url:
+
+    http://127.0.0.1:8000/admin
+
 ### Current URLS ###
 
+    http://127.0.0.1:8000
     http://127.0.0.1:8000/admin
     http://127.0.0.1:8000/accounts
     http://127.0.0.1:8000/about_us
@@ -41,8 +50,15 @@ Visit the following url:
 - Login/Logout from account
 - View my account
 - Post submission
+- Edit/delete submissions
 - View all submissions
-- Upvote and Downvote submissions
+- Sort submissions
+- Search submissions
+- Upvote and downvote submissions
+- Comment on a submission
+- Suggest improvement to a submission
+- Edit/delete comments
+- Upvote and downvote comments
 - Administrator Platform
 
 ### Contribution Guidelines ###
