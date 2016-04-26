@@ -113,8 +113,4 @@ class CustomUser(AbstractBaseUser):
     def authenticated(self):
         return True
 
-    def voted_on(self, submission):
-        voted_subs = ComVoting.objects.filter(voter=self, submission=submission)
-        return voted_subs
-
 #-----------------------------------------------------------------------------
