@@ -41,13 +41,35 @@
 					<tbody>
 						<tr>
 							<td class="col-sm-1" style="vertical-align:middle;">
+
+								{% if user.is_authenticated %}
+
 			                    <a href="{% url 'submission:comment_upvotes' slug=user.slug pk=comment.pk %}">
 			                    <img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes"/> </a>
 			                    <h6>{{ comment.upvotes }} </h6>
+
+								{% else %}
+
+			                    <img class="img-faded" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes"/> </a>
+			                    <h6>{{ comment.upvotes }} </h6>
+
+								{% endif %}
+
 			                    <h4 class="text-success">{{ comment.get_score }}</h4>
+
+								{% if user.is_authenticated %}
+
 			                    <a href="{% url 'submission:comment_downvotes' slug=user.slug pk=comment.pk %}">
 			                    <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes"/> </a>
-			                    <h6>{{ comment.downvotes }}</h6>
+			                    <h6>{{ comment.upvotes }} </h6>
+
+								{% else %}
+
+			                    <img class="img-faded" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes"/> </a>
+			                    <h6>{{ comment.upvotes }} </h6>
+
+								{% endif %}
+
 		                    </td>
 							<td>
 								<div class="comment">
@@ -89,13 +111,35 @@
 					<tbody>
 						<tr>
 		                    <td class="col-sm-1" style="vertical-align:middle;">
+
+								{% if user.is_authenticated %}
+
 			                    <a href="{% url 'submission:comment_upvotes' slug=user.slug pk=comment.pk %}">
 			                    <img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes"/> </a>
 			                    <h6>{{ comment.upvotes }} </h6>
+
+								{% else %}
+
+			                    <img class="img-faded" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes"/> </a>
+			                    <h6>{{ comment.upvotes }} </h6>
+
+								{% endif %}
+
 			                    <h4 class="text-success">{{ comment.get_score }}</h4>
+
+								{% if user.is_authenticated %}
+
 			                    <a href="{% url 'submission:comment_downvotes' slug=user.slug pk=comment.pk %}">
 			                    <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes"/> </a>
-			                    <h6>{{ comment.downvotes }}</h6>
+			                    <h6>{{ comment.upvotes }} </h6>
+
+								{% else %}
+
+			                    <img class="img-faded" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes"/> </a>
+			                    <h6>{{ comment.upvotes }} </h6>
+
+								{% endif %}
+
 		                    </td>
 							<td>
 								<div class="comment">
