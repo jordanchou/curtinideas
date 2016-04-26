@@ -1145,6 +1145,11 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+.img-faded {
+  opacity: 0.2;
+}
+
 .img-rounded {
   border-radius: 6px;
 }
