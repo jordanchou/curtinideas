@@ -11,6 +11,7 @@ CATEGORIES = (
     ('Humanities', 'Humanities'),
 )
 
+
 class Submission(models.Model):
     title = models.CharField(max_length=100)
     author = models.ForeignKey('accounts.CustomUser')
@@ -36,7 +37,7 @@ class Submission(models.Model):
         return self.title
 
     def get_score(self):
-        if ( (self.upvotes - self.downvotes) < 0 ):
+        if ((self.upvotes - self.downvotes) < 0):
             return 0
 
         return (self.upvotes - self.downvotes)
@@ -49,13 +50,16 @@ class Submission(models.Model):
 
     def increase_view(self):
         self.num_views = self.num_views + 1
+
     def get_links(self):
-    	return self.links
+        return self.links
 
 #-----------------------------------------------------------------------------
 
+
 class Comment(models.Model):
-    submission = models.ForeignKey('submission.Submission', related_name='comments', default = 0)
+    submission = models.ForeignKey(
+        'submission.Submission', related_name='comments', default=0)
     author = models.ForeignKey('accounts.CustomUser', default=0)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -65,7 +69,6 @@ class Comment(models.Model):
     upvotes = models.PositiveSmallIntegerField(default=0)
     downvotes = models.PositiveSmallIntegerField(default=0)
 
-
     def approve(self):
         self.approved_comment = True
         self.save()
@@ -74,7 +77,7 @@ class Comment(models.Model):
         return self.text
 
     def get_score(self):
-        if ( (self.upvotes - self.downvotes) < 0 ):
+        if ((self.upvotes - self.downvotes) < 0):
             return 0
 
         return (self.upvotes - self.downvotes)
@@ -90,8 +93,10 @@ class Comment(models.Model):
 
 #-----------------------------------------------------------------------------
 
+
 class SubVoting(models.Model):
-    submission = models.ForeignKey('submission.Submission', related_name='subvotes', default = 0)
+    submission = models.ForeignKey(
+        'submission.Submission', related_name='subvotes', default=0)
     voter = models.ForeignKey('accounts.CustomUser')
     upvote = models.BooleanField(default=False)
     downvote = models.BooleanField(default=False)
@@ -109,14 +114,17 @@ class SubVoting(models.Model):
         self.save()
 
     def __str__(self):
-        identifier = "SUBMISSION: " + self.submission.title + "USER: " + self.voter.email  
-        return identifier       
-        
+        identifier = "SUBMISSION: " + self.submission.title + "USER: " + self.voter.email
+        return identifier
+
 #-----------------------------------------------------------------------------
 
+
 class ComVoting(models.Model):
-    submission = models.ForeignKey('submission.Submission', related_name='comvotes', default = 0)
-    comment = models.ForeignKey('submission.Comment', related_name='comvotes', default = 0)
+    submission = models.ForeignKey(
+        'submission.Submission', related_name='comvotes', default=0)
+    comment = models.ForeignKey(
+        'submission.Comment', related_name='comvotes', default=0)
     voter = models.ForeignKey('accounts.CustomUser')
     upVote = models.BooleanField(default=False)
     downVote = models.BooleanField(default=False)
@@ -136,8 +144,9 @@ class ComVoting(models.Model):
         self.save()
 
     def __str__(self):
-        identifier = " SUBMISSION: " + self.submission.title + " COMMENT: " + str(self.comment.pk)
-        identifier = identifier + " USER: " + self.voter.email 
-        return identifier   
-        
+        identifier = " SUBMISSION: " + self.submission.title + \
+            " COMMENT: " + str(self.comment.pk)
+        identifier = identifier + " USER: " + self.voter.email
+        return identifier
+
 #-----------------------------------------------------------------------------

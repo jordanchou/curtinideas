@@ -7,6 +7,7 @@ from . import searchfunctions
 
 #-----------------------------------------------------------------------------
 
+
 def submission_detail(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
 
@@ -18,12 +19,15 @@ def submission_detail(request, pk):
 
 #-----------------------------------------------------------------------------
 
+
 def submission_list(request):
-    submissions = Submission.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+    submissions = Submission.objects.filter(
+        published_date__lte=timezone.now()).order_by('-published_date')
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 #-----------------------------------------------------------------------------
+
 
 def submission_list_upvotes(request):
     submissions = Submission.objects.order_by('-upvotes')
@@ -32,12 +36,14 @@ def submission_list_upvotes(request):
 
 #-----------------------------------------------------------------------------
 
+
 def submission_list_downvotes(request):
     submissions = Submission.objects.order_by('-downvotes')
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 #-----------------------------------------------------------------------------
+
 
 def submission_list_num_views(request):
     submissions = Submission.objects.order_by('-num_views')
@@ -46,6 +52,7 @@ def submission_list_num_views(request):
 
 #-----------------------------------------------------------------------------
 
+
 def submission_list_author(request):
     submissions = Submission.objects.order_by('-author')
 
@@ -53,11 +60,15 @@ def submission_list_author(request):
 
 #-----------------------------------------------------------------------------
 #
+
+
 def submission_list_score(request):
     submissions = list(Submission.objects.all())
-    submissions = sorted(submissions, key = lambda s:s.get_score(), reverse=True)
+    submissions = sorted(
+        submissions, key=lambda s: s.get_score(), reverse=True)
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
+
 
 def submission_list_self(request, slug):
     submissions = Submission.objects.filter(author__email=slug)
@@ -65,6 +76,7 @@ def submission_list_self(request, slug):
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 #-----------------------------------------------------------------------------
+
 
 def submission_create(request):
     if request.method == "POST":
@@ -83,71 +95,83 @@ def submission_create(request):
 
 #-----------------------------------------------------------------------------
 
+
 def update_sub_upvotes(request, slug, pk):
     submission = get_object_or_404(Submission, pk=pk)
     voter = get_object_or_404(CustomUser, slug=slug)
 
     if (SubVoting.objects.filter(voter=voter, submission=submission).exists() == False):
-        new_vote = SubVoting();
+        new_vote = SubVoting()
         new_vote.create_sub_up_vote(submission, voter)
         upvote = submission.get_upvotes()
-        submission_vote = Submission.objects.filter(pk=submission.pk).update(upvotes=upvote+1)
+        submission_vote = Submission.objects.filter(
+            pk=submission.pk).update(upvotes=upvote + 1)
 
     return submission_list(request)
 
 #-----------------------------------------------------------------------------
+
 
 def update_sub_downvotes(request, slug, pk):
     submission = get_object_or_404(Submission, pk=pk)
     voter = get_object_or_404(CustomUser, slug=slug)
 
     if (SubVoting.objects.filter(voter=voter, submission=submission).exists() == False):
-        new_vote = SubVoting();
+        new_vote = SubVoting()
         new_vote.create_sub_down_vote(submission, voter)
         downvote = submission.get_downvotes()
-        submission_vote = Submission.objects.filter(pk=submission.pk).update(downvotes=downvote+1)
+        submission_vote = Submission.objects.filter(
+            pk=submission.pk).update(downvotes=downvote + 1)
 
     return submission_list(request)
 
 #-----------------------------------------------------------------------------
+
 
 def update_com_upvotes(request, slug, pk):
     comment = get_object_or_404(Comment, pk=pk)
     voter = get_object_or_404(CustomUser, slug=slug)
 
     if (ComVoting.objects.filter(voter=voter, comment=comment).exists() == False):
-        new_vote = ComVoting();
+        new_vote = ComVoting()
         new_vote.create_com_up_vote(comment, voter)
         upvote = comment.get_upvotes()
-        comment_vote = Comment.objects.filter(pk=comment.pk).update(upvotes=upvote+1)
+        comment_vote = Comment.objects.filter(
+            pk=comment.pk).update(upvotes=upvote + 1)
 
     submission = comment.submission
     return render(request, 'submission/submission_detail.html', {'submission': submission})
 
 #-----------------------------------------------------------------------------
+
 
 def update_com_downvotes(request, slug, pk):
     comment = get_object_or_404(Comment, pk=pk)
     voter = get_object_or_404(CustomUser, slug=slug)
 
     if (ComVoting.objects.filter(voter=voter, comment=comment).exists() == False):
-        new_vote = ComVoting();
+        new_vote = ComVoting()
         new_vote.create_com_up_vote(comment, voter)
         downvote = comment.get_downvotes()
-        comment_vote = Comment.objects.filter(pk=comment.pk).update(downvotes=downvote+1)
+        comment_vote = Comment.objects.filter(
+            pk=comment.pk).update(downvotes=downvote + 1)
 
     submission = comment.submission
     return render(request, 'submission/submission_detail.html', {'submission': submission})
 
 #-----------------------------------------------------------------------------
+
+
 def submission_delete(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
     submission.delete()
 
-    submissions = Submission.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+    submissions = Submission.objects.filter(
+        published_date__lte=timezone.now()).order_by('-published_date')
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 #-----------------------------------------------------------------------------
+
 
 def submission_edit(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
@@ -165,6 +189,7 @@ def submission_edit(request, pk):
 
 #-----------------------------------------------------------------------------
 
+
 def comment_on_submission(request, slug, pk):
     submission = get_object_or_404(Submission, pk=pk)
     author = get_object_or_404(CustomUser, slug=slug)
@@ -180,7 +205,7 @@ def comment_on_submission(request, slug, pk):
     else:
         form = CommentForm()
 
-    return render(request, 'submission/comment_on_submission.html', {'form' : form})
+    return render(request, 'submission/comment_on_submission.html', {'form': form})
 
 #-----------------------------------------------------------------------------
 
@@ -199,9 +224,10 @@ def comment_edit(request, pk):
             return render(request, 'submission/submission_detail.html', {'submission': submission})
     else:
         form = CommentForm(instance=comment)
-    return render(request, 'submission/comment_on_submission.html', {'form' : form})
+    return render(request, 'submission/comment_on_submission.html', {'form': form})
 
 #-----------------------------------------------------------------------------
+
 
 def comment_delete(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
@@ -209,40 +235,45 @@ def comment_delete(request, pk):
     comment.delete()
 
     submission = get_object_or_404(Submission, pk=submission)
-    return render(request, 'submission/submission_detail.html', {'submission' : submission})
+    return render(request, 'submission/submission_detail.html', {'submission': submission})
+
 
 def submission_list_science_and_eng(request):
-    submissions = Submission.objects.filter(category = "Science and Engineering")
+    submissions = Submission.objects.filter(category="Science and Engineering")
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
+
 
 def submission_list_health_sciences(request):
-    submissions = Submission.objects.filter(category = "Health Sciences")
+    submissions = Submission.objects.filter(category="Health Sciences")
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
+
 def submission_list_humanities(request):
-    submissions = Submission.objects.filter(category = "Humanities")
+    submissions = Submission.objects.filter(category="Humanities")
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 
 #-----------------------------------------------------------------------------
 
-################## search
+# search
 def search(request):
     query_string = ''
     submissions = None
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
 
-        entry_query = searchfunctions.get_query(query_string, ['title', 'text'])
+        entry_query = searchfunctions.get_query(
+            query_string, ['title', 'text'])
 
-        submissions = Submission.objects.filter(entry_query).order_by('-published_date')
+        submissions = Submission.objects.filter(
+            entry_query).order_by('-published_date')
 
     return render_to_response('submission/submission_list.html',
-                          { 'submissions': submissions },
-                          context_instance=RequestContext(request))
+                              {'submissions': submissions},
+                              context_instance=RequestContext(request))
 
 
 #-----------------------------------------------------------------------------

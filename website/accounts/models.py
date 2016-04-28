@@ -5,7 +5,9 @@ from django.template.defaultfilters import slugify
 
 #-----------------------------------------------------------------------------
 
+
 class CustomUserManager(BaseUserManager):
+
     def create_user(self, first_name, last_name, email, sid, password=None, **args):
         '''
         Creates and saves a User with the given email, first name, last name, sid
@@ -16,13 +18,13 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Users must have an email address')
 
         user = self.model(
-                        email=self.normalize_email(email),
-                        first_name=first_name,
-                        last_name=last_name,
-                        sid=sid
-                        )
+            email=self.normalize_email(email),
+            first_name=first_name,
+            last_name=last_name,
+            sid=sid
+        )
 
-        user.slug =(user.email)
+        user.slug = (user.email)
 
         user.set_password(password)
         user.save(using=self._db)
@@ -36,12 +38,12 @@ class CustomUserManager(BaseUserManager):
         '''
 
         user = self.create_user(
-                                first_name=first_name,
-                                last_name=last_name,
-                                email=email,
-                                sid=sid,
-                                password=password
-                               )
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            sid=sid,
+            password=password
+        )
 
         user.is_admin = True
         user.save(using=self._db)
@@ -50,12 +52,13 @@ class CustomUserManager(BaseUserManager):
 
 #-----------------------------------------------------------------------------
 
+
 class CustomUser(AbstractBaseUser):
     email = models.EmailField(
-                              verbose_name='email address',
-                              max_length = 255,
-                              unique=True
-                             )
+        verbose_name='email address',
+        max_length=255,
+        unique=True
+    )
 
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -63,7 +66,7 @@ class CustomUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    slug = models.SlugField(max_length = 255, null = False)
+    slug = models.SlugField(max_length=255, null=False)
 
     objects = CustomUserManager()
 
@@ -83,17 +86,17 @@ class CustomUser(AbstractBaseUser):
     def __str__(self):
         # Return the user's email
 
-      return self.email
+        return self.email
 
     def get_email(self):
         # Return the user's email
 
-      return self.email
+        return self.email
 
     def has_perm(self, perm, obj=None):
         # Does user have a specific permission"
 
-        return True;
+        return True
 
     @property
     def is_staff(self):
