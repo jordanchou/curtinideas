@@ -107,6 +107,10 @@ def update_sub_upvotes(request, slug, pk):
         submission_vote = Submission.objects.filter(
             pk=submission.pk).update(upvotes=upvote + 1)
 
+    voter.points = voter.points + 1
+    voter.update_level
+    voter.save()
+
     return submission_list(request)
 
 #-----------------------------------------------------------------------------
@@ -122,6 +126,10 @@ def update_sub_downvotes(request, slug, pk):
         downvote = submission.get_downvotes()
         submission_vote = Submission.objects.filter(
             pk=submission.pk).update(downvotes=downvote + 1)
+
+    author.points = author.points + 1
+    author.update_level
+    author.save()
 
     return submission_list(request)
 
@@ -139,6 +147,10 @@ def update_com_upvotes(request, slug, pk):
         comment_vote = Comment.objects.filter(
             pk=comment.pk).update(upvotes=upvote + 1)
 
+        author.points = author.points + 1
+        author.update_level
+        author.save()
+
     submission = comment.submission
     return render(request, 'submission/submission_detail.html', {'submission': submission})
 
@@ -155,6 +167,10 @@ def update_com_downvotes(request, slug, pk):
         downvote = comment.get_downvotes()
         comment_vote = Comment.objects.filter(
             pk=comment.pk).update(downvotes=downvote + 1)
+
+        author.points = author.points + 1
+        author.update_level
+        author.save()
 
     submission = comment.submission
     return render(request, 'submission/submission_detail.html', {'submission': submission})
@@ -193,6 +209,7 @@ def submission_edit(request, pk):
 def comment_on_submission(request, slug, pk):
     submission = get_object_or_404(Submission, pk=pk)
     author = get_object_or_404(CustomUser, slug=slug)
+
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -200,6 +217,15 @@ def comment_on_submission(request, slug, pk):
             comment.submission = submission
             comment.author = author
             comment.save()
+
+            if form.is_improvement:
+                author.points = author.points + 3
+                author.update_level
+                author.save()
+            else:
+                author.points = author.points + 2
+                author.update_level
+                author.save()
 
             return render(request, 'submission/submission_detail.html', {'submission': submission})
     else:

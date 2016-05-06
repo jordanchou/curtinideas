@@ -67,6 +67,8 @@ class CustomUser(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     slug = models.SlugField(max_length=255, null=False)
+    points = models.IntegerField(default=0)
+    level = models.IntegerField(default=0)
 
     objects = CustomUserManager()
 
@@ -97,6 +99,9 @@ class CustomUser(AbstractBaseUser):
         # Does user have a specific permission"
 
         return True
+
+    def update_level(self):
+        level = round(points / 10, 0) + 1
 
     @property
     def is_staff(self):
