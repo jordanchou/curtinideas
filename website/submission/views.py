@@ -87,6 +87,7 @@ def submission_create(request):
             post.published_date = timezone.now()
             post.save()
 
+            post.author.add_points(4)
             return submission_list(request)
     else:
         form = SubmissionForm()
@@ -107,9 +108,7 @@ def update_sub_upvotes(request, slug, pk):
         submission_vote = Submission.objects.filter(
             pk=submission.pk).update(upvotes=upvote + 1)
 
-    voter.points = voter.points + 1
-    voter.update_level
-    voter.save()
+    voter.add_points(1)
 
     return submission_list(request)
 
@@ -127,9 +126,7 @@ def update_sub_downvotes(request, slug, pk):
         submission_vote = Submission.objects.filter(
             pk=submission.pk).update(downvotes=downvote + 1)
 
-    author.points = author.points + 1
-    author.update_level
-    author.save()
+    author.add_points(1)
 
     return submission_list(request)
 
@@ -147,10 +144,7 @@ def update_com_upvotes(request, slug, pk):
         comment_vote = Comment.objects.filter(
             pk=comment.pk).update(upvotes=upvote + 1)
 
-        author.points = author.points + 1
-        author.update_level
-        author.save()
-
+        author.add_points(1)
     submission = comment.submission
     return render(request, 'submission/submission_detail.html', {'submission': submission})
 
@@ -168,9 +162,7 @@ def update_com_downvotes(request, slug, pk):
         comment_vote = Comment.objects.filter(
             pk=comment.pk).update(downvotes=downvote + 1)
 
-        author.points = author.points + 1
-        author.update_level
-        author.save()
+        author.add_points(1)
 
     submission = comment.submission
     return render(request, 'submission/submission_detail.html', {'submission': submission})
@@ -219,13 +211,9 @@ def comment_on_submission(request, slug, pk):
             comment.save()
 
             if form.is_improvement:
-                author.points = author.points + 3
-                author.update_level
-                author.save()
+                author.add_points(3)
             else:
-                author.points = author.points + 2
-                author.update_level
-                author.save()
+                author.add_points(2)
 
             return render(request, 'submission/submission_detail.html', {'submission': submission})
     else:

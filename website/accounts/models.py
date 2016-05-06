@@ -100,8 +100,10 @@ class CustomUser(AbstractBaseUser):
 
         return True
 
-    def update_level(self):
-        level = round(points / 10, 0) + 1
+    def add_points(self, points):
+        self.points = self.points + points
+        self.level = round(self.points/10)
+        self.save()
 
     @property
     def is_staff(self):
