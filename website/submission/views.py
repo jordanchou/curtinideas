@@ -126,7 +126,8 @@ def update_sub_downvotes(request, slug, pk):
         submission_vote = Submission.objects.filter(
             pk=submission.pk).update(downvotes=downvote + 1)
 
-    author.add_points(1)
+        voter.add_points(1)
+    
 
     return submission_list(request)
 
@@ -144,7 +145,7 @@ def update_com_upvotes(request, slug, pk):
         comment_vote = Comment.objects.filter(
             pk=comment.pk).update(upvotes=upvote + 1)
 
-        author.add_points(1)
+        voter.add_points(1)
     submission = comment.submission
     return render(request, 'submission/submission_detail.html', {'submission': submission})
 
@@ -252,8 +253,13 @@ def comment_delete(request, pk):
     return render(request, 'submission/submission_detail.html', {'submission': submission})
 
 
-def submission_list_science_and_eng(request):
-    submissions = Submission.objects.filter(category="Science and Engineering")
+def submission_list_science(request):
+    submissions = Submission.objects.filter(category="Science")
+
+    return render(request, 'submission/submission_list.html', {'submissions': submissions})
+
+def submission_list_engineering(request):
+    submissions = Submission.objects.filter(category="Engineering")
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
@@ -269,6 +275,10 @@ def submission_list_humanities(request):
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
+def submission_list_arts(request):
+    submissions = Submission.objects.filter(category="Arts")
+
+    return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 #-----------------------------------------------------------------------------
 

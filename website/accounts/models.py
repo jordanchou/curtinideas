@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.template.defaultfilters import slugify
-
+import math
 #-----------------------------------------------------------------------------
 
 
@@ -68,7 +68,7 @@ class CustomUser(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     slug = models.SlugField(max_length=255, null=False)
     points = models.IntegerField(default=0)
-    level = models.IntegerField(default=0)
+    level = models.IntegerField(default=1)
 
     objects = CustomUserManager()
 
@@ -102,7 +102,7 @@ class CustomUser(AbstractBaseUser):
 
     def add_points(self, points):
         self.points = self.points + points
-        self.level = round(self.points/10)
+        self.level = math.floor(self.points/10) + 1
         self.save()
 
     @property

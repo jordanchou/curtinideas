@@ -3,8 +3,10 @@ from .models import Submission, Comment
 from django.contrib.admin import widgets as aw
 
 CATEGORIES = (
-    ('Science and Engineering', 'Science and Engineering'),
+    ('Science', 'Science'),
+    ('Engineering', 'Engineering'),
     ('Health Sciences', 'Health Sciences'),
+    ('Arts', 'Arts'),
     ('Humanities', 'Humanities'),
 )
 #-----------------------------------------------------------------------------

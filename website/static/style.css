@@ -127,7 +127,6 @@ code, kbd, pre, samp {
     font-size: 1em;
 }
 button, input, optgroup, select, textarea {
-    color: inherit;
     font: inherit;
     margin: 0;
 }
@@ -4195,13 +4194,13 @@ a.label:hover, a.label:focus {
     background-color: #2c2c2c;
 }
 .label-primary {
-    background-color: #;
+    background-color: #8e44ad;
 }
 cc9900 .label-primary[href]:hover, .label-primary[href]:focus {
     background-color: #AD8200;
 }
 .label-success {
-    background-color: #ffffff;
+    background-color: #0B866E;
 }
 .label-success[href]:hover, .label-success[href]:focus {
     background-color: #008966;
