@@ -108,6 +108,7 @@ def update_sub_upvotes(request, slug, pk):
         submission_vote = Submission.objects.filter(
         pk=submission.pk).update(upvotes=upvote + 1)
         voter.add_points(1)
+        submission.author.add_points(1)
 
     return submission_list(request)
 
@@ -142,6 +143,8 @@ def update_com_upvotes(request, slug, pk):
         comment_vote = Comment.objects.filter(
         pk=comment.pk).update(upvotes=upvote + 1)
         voter.add_points(1)
+        if(comment.is_improvement):
+            comment.author.add_points(1)
 
     submission = comment.submission
     return render(request, 'submission/submission_detail.html', {'submission': submission})
