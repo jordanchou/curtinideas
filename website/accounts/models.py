@@ -102,7 +102,7 @@ class CustomUser(AbstractBaseUser):
 
     def add_points(self, points):
         self.points = self.points + points
-        self.level = math.floor(self.points/10) + 1
+        self.level = math.floor(self.points/20) + 1
         self.save()
 
     @property
