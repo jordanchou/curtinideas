@@ -6,27 +6,40 @@
     <tbody>
         <tr>
             <td>
-                <h3>First Name: {{ object.first_name }}</h3></td>
+                <h3>First Name:  <t style="padding-left: 2em;"> {{ object.first_name }} </t>   </h3></td>
         </tr>
         <tr>
             <td>
-                <h3>Last Name: {{ object.last_name }}</h3></td>
+                <h3>Last Name:  <t style="padding-left: 2em;"> {{ object.last_name }}</t></h3></td>
         </tr>
         <tr>
             <td>
-                <h3>Email: {{ object.email }}</h3></td>
+                <h3>Email:  <t style="padding-left: 4em;"> {{ object.email }}</t></h3></td>
         </tr>
         <tr>
             <td>
-                <h3>ID (Staff/Student): {{ object.sid }}</h3></td>
+                <h3>Curtin ID:  <t style="padding-left: 2.5em;"> {{ object.sid }}</t></h3></td>
         </tr>
         <tr>
             <td>
-                <h3>Points: {{object.points}}</h3></td>
+                <h3>Points:  <t style="padding-left: 3.5em;"> {{object.points}}</t></h3></td>
         </tr>
         <tr>
             <td>
-                <h3>Level: {{object.level}}</h3></td>
+                <h3>Level: <t style="padding-left: 4em;">
+
+    				{% if object.level = 1 %}
+    					<span class="label label-default">Beginning</span>
+    				{% elif object.level = 2 %}
+    					<span class="label label-primary">Novice</span>
+    				{% elif object.level = 3 %}
+    					<span class="label label-success">Intermediate</span>
+    				{% elif object.level = 4 %}
+    					<span class="label label-warning">Advanced</span>
+    				{% elif object.level >= 5 %}
+    					<span class="label label-info">Expert</span>
+    				{% endif %}
+</t></h3></td>
         </tr>
     </tbody>
 </table>
