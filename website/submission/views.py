@@ -106,9 +106,8 @@ def update_sub_upvotes(request, slug, pk):
         new_vote.create_sub_up_vote(submission, voter)
         upvote = submission.get_upvotes()
         submission_vote = Submission.objects.filter(
-            pk=submission.pk).update(upvotes=upvote + 1)
-
-    voter.add_points(1)
+        pk=submission.pk).update(upvotes=upvote + 1)
+        voter.add_points(1)
 
     return submission_list(request)
 
@@ -124,10 +123,8 @@ def update_sub_downvotes(request, slug, pk):
         new_vote.create_sub_down_vote(submission, voter)
         downvote = submission.get_downvotes()
         submission_vote = Submission.objects.filter(
-            pk=submission.pk).update(downvotes=downvote + 1)
-
+        pk=submission.pk).update(downvotes=downvote + 1)
         voter.add_points(1)
-    
 
     return submission_list(request)
 
@@ -143,9 +140,9 @@ def update_com_upvotes(request, slug, pk):
         new_vote.create_com_up_vote(comment, voter)
         upvote = comment.get_upvotes()
         comment_vote = Comment.objects.filter(
-            pk=comment.pk).update(upvotes=upvote + 1)
-
+        pk=comment.pk).update(upvotes=upvote + 1)
         voter.add_points(1)
+
     submission = comment.submission
     return render(request, 'submission/submission_detail.html', {'submission': submission})
 
@@ -161,8 +158,7 @@ def update_com_downvotes(request, slug, pk):
         new_vote.create_com_up_vote(comment, voter)
         downvote = comment.get_downvotes()
         comment_vote = Comment.objects.filter(
-            pk=comment.pk).update(downvotes=downvote + 1)
-
+        pk=comment.pk).update(downvotes=downvote + 1)
         author.add_points(1)
 
     submission = comment.submission
@@ -211,7 +207,7 @@ def comment_on_submission(request, slug, pk):
             comment.author = author
             comment.save()
 
-            if form.is_improvement:
+            if comment.is_improvement:
                 author.add_points(3)
             else:
                 author.add_points(2)

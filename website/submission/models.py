@@ -6,8 +6,10 @@ id = 0
 
 #-----------------------------------------------------------------------------
 CATEGORIES = (
-    ('Science and Engineering', 'Science and Engineering'),
+    ('Science', 'Science'),
+    ('Engineering', 'Engineering'),
     ('Health Sciences', 'Health Sciences'),
+    ('Arts', 'Arts'),
     ('Humanities', 'Humanities'),
 )
 

@@ -9,19 +9,20 @@
         <a href="/submission/sort_by_score" class="btn btn-default">Score</a>
         <a href="/submission/sort_by_upvotes" class="btn btn-default">Upvotes</a>
         <a href="/submission/sort_by_downvotes" class="btn btn-default">Downvotes</a>
+
+        <a href="#" class="btn btn-default">Select Category</a>
+        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="/submission/filter_by_science">Science</a></li>
+            <li><a href="/submission/filter_by_engineering">Engineering</a></li>
+            <li><a href="/submission/filter_by_health_sciences">Health Sciences</a></li>
+            <li><a href="/submission/filter_by_arts">Arts</a></li>
+            <li><a href="/submission/filter_by_humanities">Humanities</a></li>
+        </ul>
+
     </div>
 </div>
 
-
-<div class="btn-group">
-    <a href="#" class="btn btn-default">Select Category</a>
-    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-    <ul class="dropdown-menu">
-        <li><a href="/submission/filter_by_science_and_eng">Science and Engineering</a></li>
-        <li><a href="/submission/filter_by_health_sciences">Health Sciences</a></li>
-        <li><a href="/submission/filter_by_humanities">Humanities</a></li>
-    </ul>
-</div>
 
 </br>
 </br>
@@ -57,12 +58,12 @@
                 </td>
                 <td colspan='3'>
                     <h2>
-                            <a href="{% url 'submission:submission_detail' pk=submission.pk %}">{{ submission.title }}</a>
+                            <a href="{% url 'submission:submission_detail' pk=submission.pk %}" style="text-decoration: none">{{ submission.title }}</a>
                         </h2>
                 </td>
 
                 {% if user.email = submission.author.get_email %}
-                <td style="vertical-align:middle; text-align:right;">
+                <td style="padding-left: 10em; vertical-align:middle; text-align:right;">
                     <a href="{% url 'submission:submission_edit' pk=submission.pk %}" class="btn btn-warning">Edit</a>
                 </td>
                 <td style="vertical-align:middle; text-align:right;">
@@ -78,9 +79,9 @@
                     {{submission.category}}
                 </td>
                 <td colspan = '2'>
-                    <a href="{% url 'accounts:account_detail' slug=submission.author %}">Author: {{submission.author.get_full_name}}</a> 
+                    <a href="{% url 'accounts:account_detail' slug=submission.author %}" style="text-decoration: none"> {{submission.author.get_full_name}}</a>
                     {% if submission.author.is_superuser %}
-                        <span class="label label-danger">Admin</span> 
+                        <span class="label label-danger">Admin</span>
                     {% endif %}
                     {% if submission.author.level = 1 %}
                         <span class="label label-default">Beginning</span>

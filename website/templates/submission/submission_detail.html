@@ -6,7 +6,10 @@
 	</div>
 	{% endif %}
 	<h2>{{ submission.title }}</h2>
-	<h3><small>{{submission.author.get_full_name}}
+	<h3><small>Category:<t style="padding-left: 0.5em;"> {{submission.category}} </t>
+		 <t style="padding-left: 3.5em;"> Author:
+			 <t style="padding-left: 0.5em;"> {{submission.author.get_full_name}} </t></t>
+ 		 	 <t style="padding-left: 0.5em;">
 				{% if submission.author.is_superuser %}
 					<span class="label label-danger">Admin</span>
 				{% endif %}
@@ -21,13 +24,13 @@
 				{% elif submission.author.level >= 5 %}
 					<span class="label label-info">Expert</span>
 				{% endif %}
-			</small></h3>
-	<h5>{{submission.category}}</h5>
-	<p>{{ submission.text|linebreaks }}</p>
+			</t>
+		</small></h3><br>
+	<p>{{ submission.text|linebreaks }}</p> <br>
 	{% if submission.links %}
-	<h4>Links</h4>
-	<a target="_blank" href="{{ submission.links }}">{{ submission.links }}</a> {% endif %}
+	<h3><small> Links:  <t style="padding-left: 0.5em;"> <a target="_blank" href="{{ submission.links }}">{{ submission.links }}</a> {% endif %} </t></h3>
 
+	<br><br>
 </div>
 {% if user.is_authenticated %}
 <a class="btn btn-default" href="{% url 'submission:comment_on_submission' slug=user.slug pk=submission.pk %}">Comment/Improvement</a> {% endif %}
@@ -73,6 +76,19 @@
 								<span class="label label-danger">Admin</span></small>
 								</h3>
 								{% endif %}
+
+								{% if comment.author.level = 1 %}
+									<span class="label label-default">Beginning</span>
+								{% elif comment.author.level = 2 %}
+									<span class="label label-primary">Novice</span>
+								{% elif comment.author.level = 3 %}
+									<span class="label label-success">Intermediate</span>
+								{% elif comment.author.level = 4 %}
+									<span class="label label-warning">Advanced</span>
+								{% elif comment.author.level >= 5 %}
+									<span class="label label-info">Expert</span>
+								{% endif %}
+
 								<p>{{ comment.text|linebreaks }}</p>
 							</div>
 						</td>
@@ -130,6 +146,19 @@
 								<span class="label label-danger">Admin</span></small>
 								</h3>
 								{% endif %}
+
+								{% if comment.author.level = 1 %}
+									<span class="label label-default">Beginning</span>
+								{% elif comment.author.level = 2 %}
+									<span class="label label-primary">Novice</span>
+								{% elif comment.author.level = 3 %}
+									<span class="label label-success">Intermediate</span>
+								{% elif comment.author.level = 4 %}
+									<span class="label label-warning">Advanced</span>
+								{% elif comment.author.level >= 5 %}
+									<span class="label label-info">Expert</span>
+								{% endif %}
+
 								<p>{{ comment.text|linebreaks }}</p>
 							</div>
 						</td>
