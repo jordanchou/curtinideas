@@ -39,7 +39,18 @@
     				{% elif object.level >= 5 %}
     					<span class="label label-info">Expert</span>
     				{% endif %}
-</t></h3></td>
+                </t></h3></td>
+        <tr>
+            <td>
+                <h3>Progress: </h3>
+
+                <div class="progress progress-striped">
+                	<div class="progress-bar progress-bar-danger" style="width: {{object.points}}%"></div>
+                </div>
+
+</td>
+
+        </tr>
         </tr>
     </tbody>
 </table>

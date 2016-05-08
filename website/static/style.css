@@ -25,6 +25,8 @@ html {
 }
 body {
     margin: 0px;
+    background: white url("engbackground.jpg") no-repeat center center fixed;
+    background-size: cover;
 }
 
 /* linkstyle */
@@ -3895,7 +3897,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 }
 .navbar-default .navbar-nav > li > a {
     color: #ffffff;
-    font-size: 20px;
+    font-size: 17px;
     padding-top: 24px;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
@@ -4272,14 +4274,16 @@ a.badge:hover, a.badge:focus {
     margin-bottom: 30px;
     color: inherit;
     background-color: #303030;
+    opacity: 0.9;
 }
 .jumbotron h1, .jumbotron .h1 {
     color: inherit;
 }
 .jumbotron p {
     margin-bottom: 15px;
-    font-size: 23px;
+    font-size: 18px;
     font-weight: 200;
+    padding-right: 0px;
 }
 .jumbotron > hr {
     border-top-color: #161616;

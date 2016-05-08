@@ -7,10 +7,15 @@
     <table>
         {{ form }}
     </table>
-    <input type="submit" name="Login" value="login" />
+    <br>
+    <input type="submit" name="Login" value="Login" />
     <input type="hidden" name="next" value="/" />
 </form>
-
-<a href="/accounts/register">Haven't got an account? Register here</a>
 <br>
-<a href="/accounts/password_change">Forgot password? Click here</a> {% endblock %}
+<h5>  Haven't got an account? </h5>
+
+<a href="/accounts/register" class="btn btn-warning">Register</a>
+<br><br>
+<h5>  Forgot password?</h5>
+<a href="/accounts/password_change" class="btn btn-warning">Change</a>
+ {% endblock %}
