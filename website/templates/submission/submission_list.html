@@ -3,13 +3,6 @@
 <h1>Discover Ideas</h1>
 <div class="btn-toolbar">
     <div class="btn-group">
-        <a href="/submission/" class="btn btn-default">Date</a>
-        <a href="/submission/sort_by_views" class="btn btn-default">Views</a>
-        <a href="/submission/sort_by_author" class="btn btn-default">Author</a>
-        <a href="/submission/sort_by_score" class="btn btn-default">Score</a>
-        <a href="/submission/sort_by_upvotes" class="btn btn-default">Upvotes</a>
-        <a href="/submission/sort_by_downvotes" class="btn btn-default">Downvotes</a>
-
         <a href="#" class="btn btn-default">Select Category</a>
         <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -19,6 +12,15 @@
             <li><a href="/submission/filter_by_arts">Arts</a></li>
             <li><a href="/submission/filter_by_humanities">Humanities</a></li>
         </ul>
+        
+        <a href="/submission/" class="btn btn-default">Date</a>
+        <a href="/submission/sort_by_views" class="btn btn-default">Views</a>
+        <a href="/submission/sort_by_author" class="btn btn-default">Author</a>
+        <a href="/submission/sort_by_score" class="btn btn-default">Score</a>
+        <a href="/submission/sort_by_upvotes" class="btn btn-default">Upvotes</a>
+        <a href="/submission/sort_by_downvotes" class="btn btn-default">Downvotes</a>
+
+        
 
     </div>
 </div>
@@ -98,7 +100,7 @@
                 <td>
                     Views: {{submission.num_views}}
                 </td>
-                <td style="text-align:right;" colspan=2>
+                <td class="col-sm-2" style="text-align:right;" colspan=2>
                     {{ submission.published_date }}
                 </td>
             </tr>
