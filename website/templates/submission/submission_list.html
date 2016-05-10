@@ -38,23 +38,29 @@
             <tr>
                 <td class="col-sm-1" style="vertical-align:middle;">
 
-                    {% if user.is_authenticated %}
+                    {% if user.is_authenticated and user.email != submission.author.get_email %}
 
                     <a href="{% url 'submission:submission_upvotes' slug=user.slug pk=submission.pk %}">
                         <img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-                    <h6>{{ submission.upvotes }} </h6> {% else %}
+                    <h6>{{ submission.upvotes }} </h6> 
+                    {% else %}
 
                     <img class="img-faded" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-                    <h6>{{ submission.upvotes }} </h6> {% endif %}
+                    <h6>{{ submission.upvotes }} </h6> 
+                    {% endif %}
 
-                    <h4 class="text-success">{{ submission.get_score }}</h4> {% if user.is_authenticated %}
+                    <h4 class="text-success">{{ submission.get_score }}</h4> 
+
+                    {% if user.is_authenticated and user.email != submission.author.get_email %}
 
                     <a href="{% url 'submission:submission_downvotes' slug=user.slug pk=submission.pk %}">
                         <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-                    <h6>{{ submission.downvotes }} </h6> {% else %}
+                    <h6>{{ submission.downvotes }} </h6> 
+                    {% else %}
 
                     <img class="img-faded" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-                    <h6>{{ submission.downvotes }} </h6> {% endif %}
+                    <h6>{{ submission.downvotes }} </h6> 
+                    {% endif %}
 
 
                 </td>
@@ -80,7 +86,7 @@
                 <td class="col-sm-2">
                     {{submission.category}}
                 </td>
-                <td colspan = '2'>
+                <td class="col-sm-3" colspan="2">
                     <a href="{% url 'accounts:account_detail' slug=submission.author %}" style="text-decoration: none"> {{submission.author.get_full_name}}</a>
                     {% if submission.author.is_superuser %}
                         <span class="label label-danger">Admin</span>
@@ -98,7 +104,7 @@
                     {% endif %}
                 </td>
                 <td>
-                    Views: {{submission.num_views}}
+                    Views : {{submission.num_views}}
                 </td>
                 <td class="col-sm-2" style="text-align:right;" colspan=2>
                     {{ submission.published_date }}

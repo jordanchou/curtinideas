@@ -33,7 +33,7 @@
 	<br><br>
 </div>
 {% if user.is_authenticated %}
-<a class="btn btn-default" href="{% url 'submission:comment_on_submission' slug=user.slug pk=submission.pk %}">Comment/Improvement</a> {% endif %}
+<a class="btn btn-warning" href="{% url 'submission:comment_on_submission' slug=user.slug pk=submission.pk %}">Add Comment/Improvement</a> {% endif %}
 
 <hr>
 <ul class="nav nav-tabs">
@@ -50,31 +50,37 @@
 					<tr>
 						<td class="col-sm-1" style="vertical-align:middle;">
 
-							{% if user.is_authenticated %}
+							{% if user.is_authenticated and user.email != submission.author.get_email %}
 
 							<a href="{% url 'submission:comment_upvotes' slug=user.slug pk=comment.pk %}">
 								<img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-							<h6>{{ comment.upvotes }} </h6> {% else %}
+							<h6>{{ comment.upvotes }} </h6> 
+							{% else %}
 
 							<img class="img-faded" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-							<h6>{{ comment.upvotes }} </h6> {% endif %}
+							<h6>{{ comment.upvotes }} </h6> 
+							{% endif %}
 
-							<h4 class="text-success">{{ comment.get_score }}</h4> {% if user.is_authenticated %}
+							<h4 class="text-success">{{ comment.get_score }}</h4> 
+
+							{% if user.is_authenticated and user.email != submission.author.get_email %}
 
 							<a href="{% url 'submission:comment_downvotes' slug=user.slug pk=comment.pk %}">
 								<img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-							<h6>{{ comment.upvotes }} </h6> {% else %}
+							<h6>{{ comment.upvotes }} </h6> 
+							{% else %}
 
 							<img class="img-faded" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-							<h6>{{ comment.upvotes }} </h6> {% endif %}
+							<h6>{{ comment.upvotes }} </h6> 
+							{% endif %}
 
 						</td>
 						<td>
 							<div class="comment">
 								<div class="date">{{ comment.created_date }}</div>
-								<strong>{{comment.author}}</strong> {% if comment.author.is_superuser%}
-								<span class="label label-danger">Admin</span></small>
-								</h3>
+								<strong>{{comment.author}}</strong> 
+								{% if comment.author.is_superuser%}
+								<span class="label label-danger">Admin</span>
 								{% endif %}
 
 								{% if comment.author.level = 1 %}
@@ -120,23 +126,29 @@
 					<tr>
 						<td class="col-sm-1" style="vertical-align:middle;">
 
-							{% if user.is_authenticated %}
+							{% if user.is_authenticated and user.email != submission.author.get_email %}
 
 							<a href="{% url 'submission:comment_upvotes' slug=user.slug pk=comment.pk %}">
 								<img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-							<h6>{{ comment.upvotes }} </h6> {% else %}
+							<h6>{{ comment.upvotes }} </h6> 
+							{% else %}
 
 							<img class="img-faded" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-							<h6>{{ comment.upvotes }} </h6> {% endif %}
+							<h6>{{ comment.upvotes }} </h6> 
+							{% endif %}
 
-							<h4 class="text-success">{{ comment.get_score }}</h4> {% if user.is_authenticated %}
+							<h4 class="text-success">{{ comment.get_score }}</h4> 
+
+							{% if user.is_authenticated and user.email != submission.author.get_email %}
 
 							<a href="{% url 'submission:comment_downvotes' slug=user.slug pk=comment.pk %}">
 								<img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-							<h6>{{ comment.upvotes }} </h6> {% else %}
+							<h6>{{ comment.upvotes }} </h6> 
+							{% else %}
 
 							<img class="img-faded" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-							<h6>{{ comment.upvotes }} </h6> {% endif %}
+							<h6>{{ comment.upvotes }} </h6> 
+							{% endif %}
 
 						</td>
 						<td>
@@ -161,7 +173,7 @@
 
 								<p>{{ comment.text|linebreaks }}</p>
 							</div>
-						</td>
+						</td >
 						{% if user.email = comment.author.get_email %}
 						<td style="vertical-align:middle; text-align:right;">
 							<a href="{% url 'submission:comment_edit' pk=comment.pk %}" class="btn btn-warning">Edit</a>
