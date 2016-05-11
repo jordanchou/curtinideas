@@ -1096,7 +1096,7 @@ img {
     height: auto;
 }
 .img-faded {
-    opacity: 0.2;
+    opacity: 0.4;
 }
 .img-rounded {
     border-radius: 6px;
@@ -3026,7 +3026,7 @@ tbody.collapse.in {
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left:auto; 
+    left:auto;
     z-index: 1000;
     display: none;
     float: left;

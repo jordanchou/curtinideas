@@ -12,7 +12,7 @@
             <li><a href="/submission/filter_by_arts">Arts</a></li>
             <li><a href="/submission/filter_by_humanities">Humanities</a></li>
         </ul>
-        
+
         <a href="/submission/" class="btn btn-default">Date</a>
         <a href="/submission/sort_by_views" class="btn btn-default">Views</a>
         <a href="/submission/sort_by_author" class="btn btn-default">Author</a>
@@ -20,7 +20,7 @@
         <a href="/submission/sort_by_upvotes" class="btn btn-default">Upvotes</a>
         <a href="/submission/sort_by_downvotes" class="btn btn-default">Downvotes</a>
 
-        
+
 
     </div>
 </div>
@@ -42,24 +42,24 @@
 
                     <a href="{% url 'submission:submission_upvotes' slug=user.slug pk=submission.pk %}">
                         <img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-                    <h6>{{ submission.upvotes }} </h6> 
+                    <h6>{{ submission.upvotes }} </h6>
                     {% else %}
 
                     <img class="img-faded" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-                    <h6>{{ submission.upvotes }} </h6> 
+                    <h6>{{ submission.upvotes }} </h6>
                     {% endif %}
 
-                    <h4 class="text-success">{{ submission.get_score }}</h4> 
+                    <h4 class="text-success">{{ submission.get_score }}</h4>
 
                     {% if user.is_authenticated and user.email != submission.author.get_email %}
 
                     <a href="{% url 'submission:submission_downvotes' slug=user.slug pk=submission.pk %}">
                         <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-                    <h6>{{ submission.downvotes }} </h6> 
+                    <h6>{{ submission.downvotes }} </h6>
                     {% else %}
 
                     <img class="img-faded" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-                    <h6>{{ submission.downvotes }} </h6> 
+                    <h6>{{ submission.downvotes }} </h6>
                     {% endif %}
 
 
