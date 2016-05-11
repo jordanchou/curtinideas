@@ -172,6 +172,7 @@ def update_com_downvotes(request, slug, pk):
 
 def submission_delete(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
+    submission.author.add_points(-4)
     submission.delete()
 
     submissions = Submission.objects.filter(
