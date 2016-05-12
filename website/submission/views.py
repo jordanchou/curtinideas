@@ -100,13 +100,26 @@ def submission_create(request):
 def update_sub_upvotes(request, slug, pk):
     submission = get_object_or_404(Submission, pk=pk)
     voter = get_object_or_404(CustomUser, slug=slug)
+    downvote = submission.get_downvotes()
+    upvote = submission.get_upvotes()
+    vote = SubVoting.objects.filter(voter=voter, submission=submission)
 
-    if (SubVoting.objects.filter(voter=voter, submission=submission).exists() == False):
+    # If vote exists, remove vote from submission, remove all related points
+    # Remove vote tuple from database. user can now re-vote if required
+    if (vote.exists() == True):
+        if ( vote[0].upvote == True ):
+            Submission.objects.filter(pk=submission.pk).update(upvotes=upvote - 1)
+        else:
+            Submission.objects.filter(pk=submission.pk).update(downvotes=downvote - 1)
+        voter.add_points(-1)
+        submission.author.add_points(-1)
+        vote.delete()
+
+    # User hasn't vote on this submission, so let them vote
+    else:
         new_vote = SubVoting()
         new_vote.create_sub_up_vote(submission, voter)
-        upvote = submission.get_upvotes()
-        submission_vote = Submission.objects.filter(
-        pk=submission.pk).update(upvotes=upvote + 1)
+        submission_vote = Submission.objects.filter(pk=submission.pk).update(upvotes=upvote + 1)
         voter.add_points(1)
         submission.author.add_points(1)
 
@@ -118,13 +131,25 @@ def update_sub_upvotes(request, slug, pk):
 def update_sub_downvotes(request, slug, pk):
     submission = get_object_or_404(Submission, pk=pk)
     voter = get_object_or_404(CustomUser, slug=slug)
+    downvote = submission.get_downvotes()
+    upvote = submission.get_upvotes()
+    vote = SubVoting.objects.filter(voter=voter, submission=submission)
 
-    if (SubVoting.objects.filter(voter=voter, submission=submission).exists() == False):
+    # If vote exists, remove vote from submission, remove all related points
+    # Remove vote tuple from database. user can now re-vote if required
+    if (vote.exists() == True):
+        if ( vote[0].upvote == True ):
+            Submission.objects.filter(pk=submission.pk).update(upvotes=upvote - 1)
+        else:
+            Submission.objects.filter(pk=submission.pk).update(downvotes=downvote - 1)
+        voter.add_points(-1)
+        submission.author.add_points(-1)
+        vote.delete()
+
+    else:
         new_vote = SubVoting()
         new_vote.create_sub_down_vote(submission, voter)
-        downvote = submission.get_downvotes()
-        submission_vote = Submission.objects.filter(
-        pk=submission.pk).update(downvotes=downvote + 1)
+        submission_vote = Submission.objects.filter(pk=submission.pk).update(downvotes=downvote + 1)
         voter.add_points(1)
 
     return submission_list(request)
@@ -135,13 +160,24 @@ def update_sub_downvotes(request, slug, pk):
 def update_com_upvotes(request, slug, pk):
     comment = get_object_or_404(Comment, pk=pk)
     voter = get_object_or_404(CustomUser, slug=slug)
+    downvote = comment.get_downvotes()
+    upvote = comment.get_upvotes()
+    vote = ComVoting.objects.filter(voter=voter, comment=comment)
 
-    if (ComVoting.objects.filter(voter=voter, comment=comment).exists() == False):
+    if (vote.exists() == True):
+        if ( vote[0].upvote == True ):
+            Comment.objects.filter(pk=comment.pk).update(upvotes=upvote - 1)
+        else:
+            Comment.objects.filter(pk=comment.pk).update(downvotes=downvote - 1)
+        voter.add_points(-1)
+        if(comment.is_improvement):
+            comment.author.add_points(-1)
+        vote.delete()
+    else:
         new_vote = ComVoting()
         new_vote.create_com_up_vote(comment, voter)
         upvote = comment.get_upvotes()
-        comment_vote = Comment.objects.filter(
-        pk=comment.pk).update(upvotes=upvote + 1)
+        comment_vote = Comment.objects.filter(pk=comment.pk).update(upvotes=upvote + 1)
         voter.add_points(1)
         if(comment.is_improvement):
             comment.author.add_points(1)
@@ -155,8 +191,18 @@ def update_com_upvotes(request, slug, pk):
 def update_com_downvotes(request, slug, pk):
     comment = get_object_or_404(Comment, pk=pk)
     voter = get_object_or_404(CustomUser, slug=slug)
+    downvote = comment.get_downvotes()
+    upvote = comment.get_upvotes()
+    vote = ComVoting.objects.filter(voter=voter, comment=comment)
 
-    if (ComVoting.objects.filter(voter=voter, comment=comment).exists() == False):
+    if (vote.exists() == True):
+        if ( vote[0].upvote == True ):
+            Comment.objects.filter(pk=comment.pk).update(upvotes=upvote - 1)
+        else:
+            Comment.objects.filter(pk=comment.pk).update(downvotes=downvote - 1)
+        voter.add_points(-1)
+        vote.delete()
+    else:
         new_vote = ComVoting()
         new_vote.create_com_up_vote(comment, voter)
         downvote = comment.get_downvotes()

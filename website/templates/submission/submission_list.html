@@ -43,6 +43,7 @@
                     <a href="{% url 'submission:submission_upvotes' slug=user.slug pk=submission.pk %}">
                         <img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
                     <h6>{{ submission.upvotes }} </h6>
+
                     {% else %}
 
                     <img class="img-faded" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
@@ -56,6 +57,7 @@
                     <a href="{% url 'submission:submission_downvotes' slug=user.slug pk=submission.pk %}">
                         <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
                     <h6>{{ submission.downvotes }} </h6>
+                    
                     {% else %}
 
                     <img class="img-faded" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
