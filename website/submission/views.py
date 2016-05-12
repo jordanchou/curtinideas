@@ -204,11 +204,9 @@ def update_com_downvotes(request, slug, pk):
         vote.delete()
     else:
         new_vote = ComVoting()
-        new_vote.create_com_up_vote(comment, voter)
-        downvote = comment.get_downvotes()
-        comment_vote = Comment.objects.filter(
-        pk=comment.pk).update(downvotes=downvote + 1)
-        author.add_points(1)
+        new_vote.create_com_down_vote(comment, voter)
+        comment_vote = Comment.objects.filter(pk=comment.pk).update(downvotes=downvote + 1)
+        voter.add_points(1)
 
     submission = comment.submission
     return render(request, 'submission/submission_detail.html', {'submission': submission})

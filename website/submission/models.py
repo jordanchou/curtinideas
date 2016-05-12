@@ -128,8 +128,8 @@ class ComVoting(models.Model):
     comment = models.ForeignKey(
         'submission.Comment', related_name='comvotes', default=0)
     voter = models.ForeignKey('accounts.CustomUser')
-    upVote = models.BooleanField(default=False)
-    downVote = models.BooleanField(default=False)
+    upvote = models.BooleanField(default=False)
+    downvote = models.BooleanField(default=False)
 
     def create_com_up_vote(self, comment, voter):
         self.submission = comment.submission
