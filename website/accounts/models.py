@@ -3,8 +3,8 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.template.defaultfilters import slugify
 import math
-#-----------------------------------------------------------------------------
 
+#-----------------------------------------------------------------------------
 
 class CustomUserManager(BaseUserManager):
 
@@ -31,6 +31,7 @@ class CustomUserManager(BaseUserManager):
 
         return user
 
+
     def create_superuser(self, first_name, last_name, email, sid, password, **args):
         '''
         Creates and saves a superuser with the given email, firstname, lastname
@@ -51,7 +52,6 @@ class CustomUserManager(BaseUserManager):
         return user
 
 #-----------------------------------------------------------------------------
-
 
 class CustomUser(AbstractBaseUser):
     email = models.EmailField(
@@ -77,37 +77,31 @@ class CustomUser(AbstractBaseUser):
 
     def get_full_name(self):
         # Return the user's full name
-
         return self.first_name + " " + self.last_name
 
     def get_short_name(self):
         # Return the user's first name
-
         return self.first_name
 
     def __str__(self):
         # Return the user's email
-
         return self.email
 
     def get_email(self):
         # Return the user's email
-
         return self.email
 
     def has_perm(self, perm, obj=None):
         # Does user have a specific permission"
-
         return True
 
     def add_points(self, points):
         self.points = self.points + points
-        self.level = math.floor(self.points/20) + 1
+        self.level = math.floor(self.points / 20) + 1
         self.save()
 
     @property
     def is_staff(self):
-
         return self.is_admin
 
     @property

@@ -25,12 +25,14 @@
 					<span class="label label-info">Expert</span>
 				{% endif %}
 			</t>
-		</small></h3><br>
-	<p>{{ submission.text|linebreaks }}</p> <br>
-	{% if submission.links %}
+		</small></h3>
+	<br>
+	<p>{{ submission.text|linebreaks }}</p>
+	<br> {% if submission.links %}
 	<h3><small> Links:  <t style="padding-left: 0.5em;"> <a target="_blank" href="{{ submission.links }}">{{ submission.links }}</a> {% endif %} </t></h3>
 
-	<br><br>
+	<br>
+	<br>
 </div>
 {% if user.is_authenticated %}
 <a class="btn btn-warning" href="{% url 'submission:comment_on_submission' slug=user.slug pk=submission.pk %}">Add Comment/Improvement</a> {% endif %}
@@ -53,47 +55,32 @@
 							{% if user.is_authenticated and user.email != comment.author.get_email %}
 
 							<a href="{% url 'submission:comment_upvotes' slug=user.slug pk=comment.pk %}">
-								<img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-							<h6>{{ comment.upvotes }} </h6>
-							{% else %}
+								<img class="img-responsive" src="{% static " submission/upvotesmall.png " %}" align="left" alt="Upvotes" /> </a>
+							<h6>{{ comment.upvotes }} </h6> {% else %}
 
-							<img class="img-faded" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-							<h6>{{ comment.upvotes }} </h6>
-							{% endif %}
+							<img class="img-faded" src="{% static " submission/upvotesmall.png " %}" align="left" alt="Upvotes" /> </a>
+							<h6>{{ comment.upvotes }} </h6> {% endif %}
 
-							<h4 class="text-success">{{ comment.get_score }}</h4>
-
-							{% if user.is_authenticated and user.email != comment.author.get_email %}
+							<h4 class="text-success">{{ comment.get_score }}</h4> {% if user.is_authenticated and user.email != comment.author.get_email %}
 
 							<a href="{% url 'submission:comment_downvotes' slug=user.slug pk=comment.pk %}">
-								<img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-							<h6>{{ comment.downvotes }} </h6>
-							{% else %}
+								<img class="img-responsive" src="{% static " submission/downvotesmall.png " %}" align="left" alt="Downvotes" /> </a>
+							<h6>{{ comment.downvotes }} </h6> {% else %}
 
-							<img class="img-faded" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-							<h6>{{ comment.downvotes }} </h6>
-							{% endif %}
+							<img class="img-faded" src="{% static " submission/downvotesmall.png " %}" align="left" alt="Downvotes" /> </a>
+							<h6>{{ comment.downvotes }} </h6> {% endif %}
 
 						</td>
 						<td>
 							<div class="comment">
 								<div class="date">{{ comment.created_date }}</div>
-								<strong>{{comment.author}}</strong>
-								{% if comment.author.is_superuser%}
-								<span class="label label-danger">Admin</span>
-								{% endif %}
-
-								{% if comment.author.level = 1 %}
-									<span class="label label-default">Beginner</span>
-								{% elif comment.author.level = 2 %}
-									<span class="label label-primary">Novice</span>
-								{% elif comment.author.level = 3 %}
-									<span class="label label-success">Intermediate</span>
-								{% elif comment.author.level = 4 %}
-									<span class="label label-warning">Advanced</span>
-								{% elif comment.author.level >= 5 %}
-									<span class="label label-info">Expert</span>
-								{% endif %}
+								<strong>{{comment.author}}</strong> {% if comment.author.is_superuser%}
+								<span class="label label-danger">Admin</span> {% endif %} {% if comment.author.level = 1 %}
+								<span class="label label-default">Beginner</span> {% elif comment.author.level = 2 %}
+								<span class="label label-primary">Novice</span> {% elif comment.author.level = 3 %}
+								<span class="label label-success">Intermediate</span> {% elif comment.author.level = 4 %}
+								<span class="label label-warning">Advanced</span> {% elif comment.author.level >= 5 %}
+								<span class="label label-info">Expert</span> {% endif %}
 
 								<p>{{ comment.text|linebreaks }}</p>
 							</div>
@@ -129,26 +116,20 @@
 							{% if user.is_authenticated and user.email != comment.author.get_email %}
 
 							<a href="{% url 'submission:comment_upvotes' slug=user.slug pk=comment.pk %}">
-								<img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-							<h6>{{ comment.upvotes }} </h6>
-							{% else %}
+								<img class="img-responsive" src="{% static " submission/upvotesmall.png " %}" align="left" alt="Upvotes" /> </a>
+							<h6>{{ comment.upvotes }} </h6> {% else %}
 
-							<img class="img-faded" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-							<h6>{{ comment.upvotes }} </h6>
-							{% endif %}
+							<img class="img-faded" src="{% static " submission/upvotesmall.png " %}" align="left" alt="Upvotes" /> </a>
+							<h6>{{ comment.upvotes }} </h6> {% endif %}
 
-							<h4 class="text-success">{{ comment.get_score }}</h4>
-
-							{% if user.is_authenticated and user.email != comment.author.get_email %}
+							<h4 class="text-success">{{ comment.get_score }}</h4> {% if user.is_authenticated and user.email != comment.author.get_email %}
 
 							<a href="{% url 'submission:comment_downvotes' slug=user.slug pk=comment.pk %}">
-								<img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-							<h6>{{ comment.downvotes }} </h6>
-							{% else %}
+								<img class="img-responsive" src="{% static " submission/downvotesmall.png " %}" align="left" alt="Downvotes" /> </a>
+							<h6>{{ comment.downvotes }} </h6> {% else %}
 
-							<img class="img-faded" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-							<h6>{{ comment.downvotes }} </h6>
-							{% endif %}
+							<img class="img-faded" src="{% static " submission/downvotesmall.png " %}" align="left" alt="Downvotes" /> </a>
+							<h6>{{ comment.downvotes }} </h6> {% endif %}
 
 						</td>
 						<td>
@@ -157,23 +138,16 @@
 								<strong>{{comment.author}}</strong> {% if comment.author.is_superuser %}
 								<span class="label label-danger">Admin</span></small>
 								</h3>
-								{% endif %}
-
-								{% if comment.author.level = 1 %}
-									<span class="label label-default">Beginner</span>
-								{% elif comment.author.level = 2 %}
-									<span class="label label-primary">Novice</span>
-								{% elif comment.author.level = 3 %}
-									<span class="label label-success">Intermediate</span>
-								{% elif comment.author.level = 4 %}
-									<span class="label label-warning">Advanced</span>
-								{% elif comment.author.level >= 5 %}
-									<span class="label label-info">Expert</span>
-								{% endif %}
+								{% endif %} {% if comment.author.level = 1 %}
+								<span class="label label-default">Beginner</span> {% elif comment.author.level = 2 %}
+								<span class="label label-primary">Novice</span> {% elif comment.author.level = 3 %}
+								<span class="label label-success">Intermediate</span> {% elif comment.author.level = 4 %}
+								<span class="label label-warning">Advanced</span> {% elif comment.author.level >= 5 %}
+								<span class="label label-info">Expert</span> {% endif %}
 
 								<p>{{ comment.text|linebreaks }}</p>
 							</div>
-						</td >
+						</td>
 						{% if user.email = comment.author.get_email %}
 						<td style="vertical-align:middle; text-align:right;">
 							<a href="{% url 'submission:comment_edit' pk=comment.pk %}" class="btn btn-warning">Edit</a>

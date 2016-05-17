@@ -21,14 +21,11 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <img class="img-responsive" src="{% static "curtinlogo.png" %}" align="left" alt="CurtinIdeas" />
+                        <img class="img-responsive" src="{% static " curtinlogo.png " %}" align="left" alt="CurtinIdeas" />
                         <a class="navbar-brand" href="/">CurtinIdeas</a>
                     </div>
 
 
-
-                    <!-- 4 links are considered the (current), maybe change colour of span to keep
-            Add a comment to this line the look, and have the active link be an even darker colour-->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="/submission/">Discover<span class="sr-only">(current)</span></a></li>
@@ -41,8 +38,6 @@
                             <li class="active"><a href="/about_us">About Us <span class="sr-only">(current)</span></a></li>
                         </ul>
 
-
-
                         <!-- Search Button -->
                         <form class="navbar-form navbar-left" id="searchform" action="{% url 'submission:submission_search' %}" method="get" accept-charset="utf-8">
                             <div class="form-group" <button class="searchbutton" type="submit">
@@ -51,8 +46,6 @@
                                 <button type="submit" class="btn btn-default">Submit</button>
                             </div>
                         </form>
-
-
 
 
                         {% if user.is_authenticated %}
@@ -73,9 +66,6 @@
             </nav>
 
 
-
-
-            <!-- Currently being used as just a gap between navbar and content-->
             <div class="page-header">
             </div>
 
@@ -92,12 +82,9 @@
             </div>
 
 
-
-
             <!-- FOOTER -->
             <footer>
                 <div id="footer">
-                    <!--<div class="well well-sm">-->
                     <table class="table table-striped table-hover text-center">
                         <thead>
                             <th class="text-center">
@@ -127,7 +114,6 @@
                                 {% endif %}
                         </tbody>
                     </table>
-                    <!--</div>-->
                 </div>
             </footer>
         </div>

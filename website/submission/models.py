@@ -5,6 +5,7 @@ from django.utils import timezone
 id = 0
 
 #-----------------------------------------------------------------------------
+
 CATEGORIES = (
     ('Science', 'Science'),
     ('Engineering', 'Engineering'),
@@ -13,6 +14,7 @@ CATEGORIES = (
     ('Humanities', 'Humanities'),
 )
 
+#-----------------------------------------------------------------------------
 
 class Submission(models.Model):
     title = models.CharField(max_length=100)
@@ -58,7 +60,6 @@ class Submission(models.Model):
 
 #-----------------------------------------------------------------------------
 
-
 class Comment(models.Model):
     submission = models.ForeignKey(
         'submission.Submission', related_name='comments', default=0)
@@ -90,11 +91,7 @@ class Comment(models.Model):
     def get_downvotes(self):
         return self.downvotes
 
-#    def delete_comment(self):
-#        Comment.objects.filter(self.pk).delete()
-
 #-----------------------------------------------------------------------------
-
 
 class SubVoting(models.Model):
     submission = models.ForeignKey(
@@ -120,7 +117,6 @@ class SubVoting(models.Model):
         return identifier
 
 #-----------------------------------------------------------------------------
-
 
 class ComVoting(models.Model):
     submission = models.ForeignKey(

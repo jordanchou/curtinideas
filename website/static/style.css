@@ -3026,7 +3026,7 @@ tbody.collapse.in {
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left:auto;
+    left: auto;
     z-index: 1000;
     display: none;
     float: left;
@@ -4277,10 +4277,9 @@ a.badge:hover, a.badge:focus {
     padding-bottom: 30px;
     margin-bottom: 30px;
     color: inherit;
-    background-color: rgba(48,48,48,0.7);
+    background-color: rgba(48, 48, 48, 0.7);
     background-color: #303030;
     opacity: 0.8;
-
 }
 .jumbotron h1, .jumbotron .h1 {
     color: inherit;

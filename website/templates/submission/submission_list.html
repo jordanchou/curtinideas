@@ -19,9 +19,6 @@
         <a href="/submission/sort_by_score" class="btn btn-default">Score</a>
         <a href="/submission/sort_by_upvotes" class="btn btn-default">Upvotes</a>
         <a href="/submission/sort_by_downvotes" class="btn btn-default">Downvotes</a>
-
-
-
     </div>
 </div>
 
@@ -29,7 +26,6 @@
 </br>
 </br>
 </br>
-
 
 {% for submission in submissions %}
 <div class="table-responsive">
@@ -41,28 +37,20 @@
                     {% if user.is_authenticated and user.email != submission.author.get_email %}
 
                     <a href="{% url 'submission:submission_upvotes' slug=user.slug pk=submission.pk %}">
-                        <img class="img-responsive" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-                    <h6>{{ submission.upvotes }} </h6>
+                        <img class="img-responsive" src="{% static " submission/upvotesmall.png " %}" align="left" alt="Upvotes" /> </a>
+                    <h6>{{ submission.upvotes }} </h6> {% else %}
 
-                    {% else %}
+                    <img class="img-faded" src="{% static " submission/upvotesmall.png " %}" align="left" alt="Upvotes" /> </a>
+                    <h6>{{ submission.upvotes }} </h6> {% endif %}
 
-                    <img class="img-faded" src="{% static "submission/upvotesmall.png" %}" align="left" alt="Upvotes" /> </a>
-                    <h6>{{ submission.upvotes }} </h6>
-                    {% endif %}
-
-                    <h4 class="text-success">{{ submission.get_score }}</h4>
-
-                    {% if user.is_authenticated and user.email != submission.author.get_email %}
+                    <h4 class="text-success">{{ submission.get_score }}</h4> {% if user.is_authenticated and user.email != submission.author.get_email %}
 
                     <a href="{% url 'submission:submission_downvotes' slug=user.slug pk=submission.pk %}">
-                        <img class="img-responsive" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-                    <h6>{{ submission.downvotes }} </h6>
+                        <img class="img-responsive" src="{% static " submission/downvotesmall.png " %}" align="left" alt="Downvotes" /> </a>
+                    <h6>{{ submission.downvotes }} </h6> {% else %}
 
-                    {% else %}
-
-                    <img class="img-faded" src="{% static "submission/downvotesmall.png" %}" align="left" alt="Downvotes" /> </a>
-                    <h6>{{ submission.downvotes }} </h6>
-                    {% endif %}
+                    <img class="img-faded" src="{% static " submission/downvotesmall.png " %}" align="left" alt="Downvotes" /> </a>
+                    <h6>{{ submission.downvotes }} </h6> {% endif %}
 
 
                 </td>
@@ -89,21 +77,13 @@
                     {{submission.category}}
                 </td>
                 <td class="col-sm-3" colspan="2">
-                    <a href="{% url 'accounts:account_detail' slug=submission.author %}" style="text-decoration: none"> {{submission.author.get_full_name}}</a>
-                    {% if submission.author.is_superuser %}
-                        <span class="label label-danger">Admin</span>
-                    {% endif %}
-                    {% if submission.author.level = 1 %}
-                        <span class="label label-default">Beginner</span>
-                    {% elif submission.author.level = 2 %}
-                        <span class="label label-primary">Novice</span>
-                    {% elif submission.author.level = 3 %}
-                        <span class="label label-success">Intermediate</span>
-                    {% elif submission.author.level = 4 %}
-                        <span class="label label-warning">Advanced</span>
-                    {% elif submission.author.level >= 5 %}
-                        <span class="label label-info">Expert</span>
-                    {% endif %}
+                    <a href="{% url 'accounts:account_detail' slug=submission.author %}" style="text-decoration: none"> {{submission.author.get_full_name}}</a> {% if submission.author.is_superuser %}
+                    <span class="label label-danger">Admin</span> {% endif %} {% if submission.author.level = 1 %}
+                    <span class="label label-default">Beginner</span> {% elif submission.author.level = 2 %}
+                    <span class="label label-primary">Novice</span> {% elif submission.author.level = 3 %}
+                    <span class="label label-success">Intermediate</span> {% elif submission.author.level = 4 %}
+                    <span class="label label-warning">Advanced</span> {% elif submission.author.level >= 5 %}
+                    <span class="label label-info">Expert</span> {% endif %}
                 </td>
                 <td>
                     Views : {{submission.num_views}}
@@ -117,4 +97,5 @@
     </table>
 </div>
 </br>
+
 {% endfor %} {% endblock %}

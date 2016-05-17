@@ -8,6 +8,7 @@ from django.utils import timezone
 from .forms import RegistrationForm
 from .models import CustomUser
 
+#-----------------------------------------------------------------------------
 
 class RegistrationView(CreateView):
     form_class = RegistrationForm
@@ -17,24 +18,11 @@ class RegistrationView(CreateView):
         obj = form.save(commit=False)
         obj.slug = obj.email
         obj.save()
-
-        #reset_form = PasswordResetForm(self.request.POST)
-        # reset_form.is_valid()
-
-        # Copied from django/contrib/auth/views.py : password_reset
-        # opts = {
-        #   'use_https': self.request.is_secure(),
-        #    'email_template_name': 'accounts/verification.html',
-        #    'subject_template_name' : 'accounts/verification_subject.html',
-        #    'request': self.request,
-        #        }
-        # This form sends the email on save()
-        # reset_form.save(**opts)
-
         template = loader.get_template('accounts/registration_done.html')
 
         return HttpResponse(template.render())
 
+#-----------------------------------------------------------------------------
 
 class AccountDetailView(DetailView):
 
@@ -51,6 +39,7 @@ class AccountDetailView(DetailView):
 
         return render(request, 'accounts/customuser_detail.html', {'accounts': account})
 
+#-----------------------------------------------------------------------------
 
 class AccountUpdateView(DetailView):
 
@@ -65,3 +54,5 @@ class AccountUpdateView(DetailView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+#-----------------------------------------------------------------------------

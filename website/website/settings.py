@@ -29,9 +29,9 @@ SECRET_KEY = 'ra2lbbt2@at1iu&det80kqi34rigv16u=(3z7=f2!i@t#t$%5-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cbeardsmore.pythonanywhere.com' ]
+ALLOWED_HOSTS = ['cbeardsmore.pythonanywhere.com']
 
-#CUSTOM USER MODEL
+# CUSTOM USER MODEL
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
@@ -69,7 +69,7 @@ ROOT_URLCONF = 'website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [normpath(join(SITE_ROOT, 'templates')),],
+        'DIRS': [normpath(join(SITE_ROOT, 'templates')), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,9 +133,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_PATH = os.path.join(PROJECT_PATH,'static')
+STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
 
-STATIC_URL = '/static/' # You may find this is already defined as such.
+STATIC_URL = '/static/'  # You may find this is already defined as such.
 
 STATICFILES_DIRS = (
     STATIC_PATH,

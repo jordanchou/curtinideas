@@ -7,7 +7,6 @@ from . import searchfunctions
 
 #-----------------------------------------------------------------------------
 
-
 def submission_detail(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
 
@@ -19,7 +18,6 @@ def submission_detail(request, pk):
 
 #-----------------------------------------------------------------------------
 
-
 def submission_list(request):
     submissions = Submission.objects.filter(
         published_date__lte=timezone.now()).order_by('-published_date')
@@ -28,14 +26,12 @@ def submission_list(request):
 
 #-----------------------------------------------------------------------------
 
-
 def submission_list_upvotes(request):
     submissions = Submission.objects.order_by('-upvotes')
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 #-----------------------------------------------------------------------------
-
 
 def submission_list_downvotes(request):
     submissions = Submission.objects.order_by('-downvotes')
@@ -44,7 +40,6 @@ def submission_list_downvotes(request):
 
 #-----------------------------------------------------------------------------
 
-
 def submission_list_num_views(request):
     submissions = Submission.objects.order_by('-num_views')
 
@@ -52,15 +47,12 @@ def submission_list_num_views(request):
 
 #-----------------------------------------------------------------------------
 
-
 def submission_list_author(request):
     submissions = Submission.objects.order_by('-author')
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 #-----------------------------------------------------------------------------
-#
-
 
 def submission_list_score(request):
     submissions = list(Submission.objects.all())
@@ -69,6 +61,7 @@ def submission_list_score(request):
 
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
+#-----------------------------------------------------------------------------
 
 def submission_list_self(request, slug):
     submissions = Submission.objects.filter(author__email=slug)
@@ -76,7 +69,6 @@ def submission_list_self(request, slug):
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 #-----------------------------------------------------------------------------
-
 
 def submission_create(request):
     if request.method == "POST":
@@ -95,7 +87,6 @@ def submission_create(request):
     return render(request, 'submission/submission_create.html', {'form': form})
 
 #-----------------------------------------------------------------------------
-
 
 def update_sub_upvotes(request, slug, pk):
     submission = get_object_or_404(Submission, pk=pk)
@@ -127,7 +118,6 @@ def update_sub_upvotes(request, slug, pk):
 
 #-----------------------------------------------------------------------------
 
-
 def update_sub_downvotes(request, slug, pk):
     submission = get_object_or_404(Submission, pk=pk)
     voter = get_object_or_404(CustomUser, slug=slug)
@@ -155,7 +145,6 @@ def update_sub_downvotes(request, slug, pk):
     return submission_list(request)
 
 #-----------------------------------------------------------------------------
-
 
 def update_com_upvotes(request, slug, pk):
     comment = get_object_or_404(Comment, pk=pk)
@@ -187,7 +176,6 @@ def update_com_upvotes(request, slug, pk):
 
 #-----------------------------------------------------------------------------
 
-
 def update_com_downvotes(request, slug, pk):
     comment = get_object_or_404(Comment, pk=pk)
     voter = get_object_or_404(CustomUser, slug=slug)
@@ -213,7 +201,6 @@ def update_com_downvotes(request, slug, pk):
 
 #-----------------------------------------------------------------------------
 
-
 def submission_delete(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
     submission.author.add_points(-4)
@@ -224,7 +211,6 @@ def submission_delete(request, pk):
     return render(request, 'submission/submission_list.html', {'submissions': submissions})
 
 #-----------------------------------------------------------------------------
-
 
 def submission_edit(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
@@ -241,7 +227,6 @@ def submission_edit(request, pk):
     return render(request, 'submission/submission_create.html', {'form': form})
 
 #-----------------------------------------------------------------------------
-
 
 def comment_on_submission(request, slug, pk):
     submission = get_object_or_404(Submission, pk=pk)
@@ -268,7 +253,6 @@ def comment_on_submission(request, slug, pk):
 
 #-----------------------------------------------------------------------------
 
-
 def comment_edit(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     submission = get_object_or_404(Submission, pk=comment.submission.pk)
@@ -287,7 +271,6 @@ def comment_edit(request, pk):
 
 #-----------------------------------------------------------------------------
 
-
 def comment_delete(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     submission = comment.submission.pk
@@ -296,6 +279,7 @@ def comment_delete(request, pk):
     submission = get_object_or_404(Submission, pk=submission)
     return render(request, 'submission/submission_detail.html', {'submission': submission})
 
+#-----------------------------------------------------------------------------
 
 def submission_list_science(request):
     submissions = Submission.objects.filter(category="Science")
@@ -342,6 +326,5 @@ def search(request):
     return render_to_response('submission/submission_list.html',
                               {'submissions': submissions},
                               context_instance=RequestContext(request))
-
 
 #-----------------------------------------------------------------------------

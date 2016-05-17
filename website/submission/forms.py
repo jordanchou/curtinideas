@@ -2,6 +2,8 @@ from django import forms
 from .models import Submission, Comment
 from django.contrib.admin import widgets as aw
 
+#-----------------------------------------------------------------------------
+
 CATEGORIES = (
     ('Science', 'Science'),
     ('Engineering', 'Engineering'),
@@ -9,8 +11,8 @@ CATEGORIES = (
     ('Arts', 'Arts'),
     ('Humanities', 'Humanities'),
 )
-#-----------------------------------------------------------------------------
 
+#-----------------------------------------------------------------------------
 
 class SubmissionForm(forms.ModelForm):
     title = forms.CharField(max_length=100,
@@ -34,7 +36,6 @@ class SubmissionForm(forms.ModelForm):
 
 #-----------------------------------------------------------------------------
 
-
 class CommentForm(forms.ModelForm):
 
     class Meta:
@@ -42,7 +43,6 @@ class CommentForm(forms.ModelForm):
         fields = ('text', 'is_improvement')
 
 #-----------------------------------------------------------------------------
-
 
 class CommentEditForm(forms.ModelForm):
 
